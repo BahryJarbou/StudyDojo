@@ -3,7 +3,7 @@ import Hero from "../components/Hero";
 
 const Home = () => {
   return (
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-12 max-w-full">
       <Hero />
       <FeatureCards />
     </div>

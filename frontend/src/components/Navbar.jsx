@@ -1,9 +1,13 @@
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 shadow-xl shadow-black lg:w-[60%] rounded-4xl mt-4 self-center px-4">
+    <div className="navbar bg-base-100 w-full shadow-xl shadow-black lg:w-[60%] rounded-4xl mt-[1rem] mb-[8rem] self-center px-4">
       <div className="navbar-start">
-        <button className="btn btn-ghost sm:text-xs lg:text-xl rounded-4xl btn-soft btn-success btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">
-          Study Dojo
+        <button className="btn btn-ghost sm:text-xs lg:text-xl rounded-4xl btn-soft btn-success sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">
+          <img
+            src="../public/studyDojo.png"
+            alt=""
+            className="h-[2rem] lg:h-[4rem] object-cover"
+          />
         </button>
       </div>
       <div className="navbar-end gap-4">
