@@ -1,7 +1,7 @@
 const Hero = () => {
   return (
     <div
-      className="hero shadow-2xl shadow-black rounded-4xl lg:max-w-screen sm:max-w-sm md:max-w-md"
+      className="hero shadow-2xl shadow-black rounded-4xl w-full"
       style={{
         backgroundImage:
           "url(https://images.unsplash.com/photo-1581447109200-bf2769116351?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
@@ -9,11 +9,11 @@ const Hero = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="hero-overlay rounded-4xl lg:px-[36rem] lg:py-[16rem] lg:max-w-screen sm:max-w-sm md:max-w-md"></div>
-      <div className="hero-content text-neutral-content text-center">
-        <div className="max-w-xl ">
-          <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-          <p className="mb-5">
+      <div className="hero-overlay rounded-4xl lg:px-[36rem] lg:py-[16rem] max-w-full"></div>
+      <div className="hero-content text-neutral-content text-center w-full">
+        <div className="lg:max-w-xl">
+          <h1 className="mb-5 sm:text-md lg:text-5xl font-bold">Hello there</h1>
+          <p className="mb-5 text-xs lg:text-2xl">
             Turn chaos into clarity with your personal dojo for mastering study
             time. Focus smarter, track better, and study like a pro with
             sessions structured like never before. From tasks to triumphs, you
