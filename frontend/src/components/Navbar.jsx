@@ -4,7 +4,7 @@ const Navbar = () => {
       <div className="navbar-start">
         <button className="btn btn-ghost sm:text-xs lg:text-xl rounded-4xl btn-soft btn-success sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">
           <img
-            src="../public/studyDojo.png"
+            src="studyDojo.png"
             alt=""
             className="h-[2rem] lg:h-[4rem] object-cover"
           />
