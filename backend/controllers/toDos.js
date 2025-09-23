@@ -1,4 +1,4 @@
-import ToDo from "../models/ToDo";
+import ToDo from "../models/ToDo.js";
 
 const getToDos = async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-import Flashcard from "../models/Flashcard";
+import Flashcard from "../models/Flashcard.js";
 
 const getFlashcards = async (req, res) => {
   try {
@@ -22,7 +22,7 @@ const getFlashcardById = async (req, res) => {
   }
 };
 
-const updateFlashcards = async (req, res) => {
+const updateFlashcard = async (req, res) => {
   try {
     const {
       params: { id },
@@ -50,4 +50,4 @@ const deleteFlashcard = async (req, res) => {
   }
 };
 
-export { getFlashcards, getFlashcardById, updateFlashcards, deleteFlashcard };
+export { getFlashcards, getFlashcardById, updateFlashcard, deleteFlashcard };
