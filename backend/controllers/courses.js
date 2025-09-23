@@ -1,8 +1,8 @@
-import Course from "../models/Course";
+import Course from "../models/Course.js";
 
 const getCourses = async (req, res) => {
   try {
-    const courses = await Course.find({ user: req.user._id });
+    const courses = await Course.find();
     res.status(200).json(courses);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -46,4 +46,4 @@ const deleteCourse = async (req, res) => {
   }
 };
 
-export default { getCourses, getCourseById, updateCourse, deleteCourse };
+export { getCourses, getCourseById, updateCourse, deleteCourse };
