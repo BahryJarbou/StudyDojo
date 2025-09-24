@@ -7,6 +7,7 @@ import courseRouter from "./routes/courseRouter.js";
 import noteRouter from "./routes/noteRouter.js";
 import flashcardRouter from "./routes/flashcardRouter.js";
 import toDoRouter from "./routes/toDoRouter.js";
+import authRouter from "./routes/authRouter.js";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -19,6 +20,7 @@ app.use("/courses", courseRouter);
 app.use("/notes", noteRouter);
 app.use("/flashcards", flashcardRouter);
 app.use("/todos", toDoRouter);
+app.use("/auth", authRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
