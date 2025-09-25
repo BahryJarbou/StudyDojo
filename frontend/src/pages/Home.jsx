@@ -1,12 +1,22 @@
+import { Navigate } from "react-router";
 import FeatureCards from "../components/FeatureCards";
 import Hero from "../components/Hero";
+import { use } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
 const Home = () => {
-  return (
-    <div className="flex flex-col gap-12 max-w-full">
-      <Hero />
-      <FeatureCards />
-    </div>
+  const { loading, user } = use(AuthContext);
+  return !loading ? (
+    !user ? (
+      <div className="flex flex-col gap-12 max-w-full">
+        <Hero />
+        <FeatureCards />
+      </div>
+    ) : (
+      <Navigate to="/courses" />
+    )
+  ) : (
+    <span className="loading loading-spinner loading-xl"></span>
   );
 };
 

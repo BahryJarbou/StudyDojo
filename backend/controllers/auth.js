@@ -42,4 +42,13 @@ const register = async (req, res) => {
   }
 };
 
-export { login, register };
+const profile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export { login, register, profile };
