@@ -16,7 +16,9 @@ const Home = () => {
       <Navigate to="/courses" />
     )
   ) : (
-    <span className="loading loading-spinner loading-xl"></span>
+    <div className="flex flex-col gap-12 max-w-full">
+      <span className="loading loading-spinner loading-xl"></span>
+    </div>
   );
 };
 
