@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router";
 import { AuthProvider } from "./context/AuthProvider.jsx";
+import { CoursesProvider } from "./context/coursesContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <CoursesProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </CoursesProvider>
   </BrowserRouter>
 );

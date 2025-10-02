@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+import verifyToken from "../middlewares/auth.js";
+
 import {
   getFlashcards,
   getFlashcardById,
@@ -9,7 +11,7 @@ import {
 
 const flashcardRouter = Router();
 
-flashcardRouter.route("/").get(getFlashcards);
+flashcardRouter.route("/").get(verifyToken, getFlashcards);
 flashcardRouter
   .route("/:id")
   .get(getFlashcardById)

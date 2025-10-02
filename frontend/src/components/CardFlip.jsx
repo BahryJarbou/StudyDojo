@@ -12,7 +12,6 @@ const CardFlip = ({ question, answer, flippable }) => {
 
   const handleFlip = (e) => {
     const delta = Math.abs(e.screenY - state.current.y);
-    console.log(delta);
 
     if (delta > 10) {
       return;

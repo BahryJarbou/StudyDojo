@@ -1,5 +1,6 @@
 import CardStack from "./CardStack";
-import ToDo from "./ToDo";
+import DragNotes from "./DragNotes";
+import VanishList from "./ToDoList";
 
 const CourseContent = () => {
   const courseInfo = {
@@ -10,7 +11,7 @@ const CourseContent = () => {
       <input
         type="radio"
         name="my_tabs_3"
-        className="tab w-[50%]"
+        className="tab w-[50%] bg-base-300"
         aria-label="Course Info"
         defaultChecked
       />
@@ -29,7 +30,7 @@ const CourseContent = () => {
             <input type="radio" name="my-accordion-3" />
             <div className="collapse-title font-semibold">To Do</div>
             <div className="collapse-content text-sm">
-              <ToDo />
+              <VanishList />
             </div>
           </div>
           <div className="collapse collapse-plus bg-base-100 border border-base-300">
@@ -58,7 +59,7 @@ const CourseContent = () => {
       <input
         type="radio"
         name="my_tabs_3"
-        className="tab w-[50%]"
+        className="tab w-[50%] bg-base-300"
         aria-label="Course Content"
       />
       <div className="tab-content bg-base-100 border-base-300 p-6">
@@ -72,9 +73,9 @@ const CourseContent = () => {
           </div>
           <div className="collapse collapse-plus bg-base-100 border border-base-300">
             <input type="radio" name="my-accordion-3" />
-            <div className="collapse-title font-semibold">To Do</div>
+            <div className="collapse-title font-semibold">Notes</div>
             <div className="collapse-content text-sm">
-              <ToDo />
+              <DragNotes />
             </div>
           </div>
           <div className="collapse collapse-plus bg-base-100 border border-base-300">
