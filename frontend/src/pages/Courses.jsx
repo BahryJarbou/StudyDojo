@@ -3,9 +3,12 @@ import Home from "./Home";
 import { AuthContext } from "../context/AuthProvider";
 import { use } from "react";
 import { Navigate } from "react-router";
+import { CoursesContext } from "../context/coursesContext";
 
 const Courses = () => {
   const { user, loading } = use(AuthContext);
+  const { courses, setCourses } = use(CoursesContext);
+
   return !loading ? (
     !user ? (
       <Navigate to="/" />

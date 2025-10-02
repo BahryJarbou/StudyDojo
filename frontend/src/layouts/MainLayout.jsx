@@ -1,11 +1,15 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Outlet } from "react-router";
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
+import axios from "axios";
+import { CoursesContext } from "../context/coursesContext";
 
 const MainLayout = () => {
+  const { courses } = use(CoursesContext);
   const { user, loading } = use(AuthContext);
+
   return !loading ? (
     user ? (
       <main className="bg-[url(https://plus.unsplash.com/premium_photo-1681488394409-5614ef55488c?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)] object-fill w-full">
@@ -38,12 +42,11 @@ const MainLayout = () => {
             ></label>
             <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
               {/* Sidebar content here */}
-              <li>
-                <a>Sidebar Item 1</a>
-              </li>
-              <li>
-                <a>Sidebar Item 2</a>
-              </li>
+              {courses.map((course) => (
+                <li key={course._id}>
+                  <a>{course.name}</a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

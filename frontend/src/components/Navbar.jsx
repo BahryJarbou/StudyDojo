@@ -56,9 +56,8 @@ const Navbar = ({ sideBarBtn }) => {
           </NavLink>
         </div>
         <div className="navbar-end gap-4">
-          <button className="btn rounded-4xl btn-soft btn-success btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">
-            {sideBarBtn}
-          </button>
+          {sideBarBtn}
+
           <button className="btn rounded-4xl btn-soft btn-success btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">
             logout
           </button>
