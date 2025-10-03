@@ -7,7 +7,7 @@ const CourseContent = () => {
     description: "I’m currently taking a beginner JavaScript course,",
   };
   return (
-    <div className="tabs min-w-screen tabs-lift px-4">
+    <div className="tabs shrink-0 w-[97vw] tabs-lift px-4">
       <input
         type="radio"
         name="my_tabs_3"

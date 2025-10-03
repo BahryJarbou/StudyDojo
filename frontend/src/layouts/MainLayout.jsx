@@ -12,12 +12,12 @@ const MainLayout = () => {
 
   return !loading ? (
     user ? (
-      <main className="bg-[url(https://plus.unsplash.com/premium_photo-1681488394409-5614ef55488c?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)] object-fill w-full">
+      <div className="bg-[url(https://plus.unsplash.com/premium_photo-1681488394409-5614ef55488c?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)] object-fill w-full">
         <div className="drawer">
           <input id="my-drawer" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content">
             {/* Page content here */}
-            <div className="min-h-screen flex flex-col backdrop-blur-sm gap-4 items-center justify-between w-full">
+            <div className="min-h-screen min-w-full flex flex-col backdrop-blur-sm gap-4 items-center justify-between w-full">
               <Navbar
                 sideBarBtn={
                   <label
@@ -28,9 +28,9 @@ const MainLayout = () => {
                   </label>
                 }
               />
-              <div className="flex-grow p-4">
+              <main className="flex-grow p-4">
                 <Outlet />
-              </div>
+              </main>
               <Footer />
             </div>
           </div>
@@ -50,7 +50,7 @@ const MainLayout = () => {
             </ul>
           </div>
         </div>
-      </main>
+      </div>
     ) : (
       <main className="bg-[url(https://plus.unsplash.com/premium_photo-1681488394409-5614ef55488c?q=80&w=1364&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)] object-fill w-full">
         {/* Page content here */}
@@ -64,7 +64,7 @@ const MainLayout = () => {
       </main>
     )
   ) : (
-    <span className="loading loading-spinner loading-xl"></span>
+    <span className=" absolute translate-1/2 top-[50%] left-[50%] loading loading-spinner loading-xl"></span>
   );
 };
 
