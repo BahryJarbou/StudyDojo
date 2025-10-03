@@ -4,6 +4,7 @@ import { AuthContext } from "../context/AuthProvider";
 import { use } from "react";
 import { Navigate } from "react-router";
 import { CoursesContext } from "../context/coursesContext";
+import CoursesAccordion from "../components/CoursesAccordion";
 
 const Courses = () => {
   const { user, loading } = use(AuthContext);
@@ -13,7 +14,7 @@ const Courses = () => {
     !user ? (
       <Navigate to="/" />
     ) : (
-      <CourseContent />
+      <CoursesAccordion />
     )
   ) : (
     <span className="loading loading-spinner loading-xl"></span>

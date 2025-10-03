@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthProvider";
 import { NavLink } from "react-router";
 
 const Navbar = ({ sideBarBtn }) => {
-  const { loading, user } = use(AuthContext);
+  const { loading, user, logout } = use(AuthContext);
   return !loading ? (
     !user ? (
       <div className="navbar bg-base-100 w-full shadow-xl shadow-black lg:w-[60%] rounded-4xl mt-[1rem] mb-[2rem] lg:mb-[8rem] self-center px-4">
@@ -58,7 +58,10 @@ const Navbar = ({ sideBarBtn }) => {
         <div className="navbar-end gap-4">
           {sideBarBtn}
 
-          <button className="btn rounded-4xl btn-soft btn-success btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">
+          <button
+            onClick={logout}
+            className="btn rounded-4xl btn-soft btn-success btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl"
+          >
             logout
           </button>
           <NavLink
