@@ -12,9 +12,13 @@ const getCourses = async (req, res) => {
 const createCourse = async (req, res) => {
   try {
     const {
-      body: { name },
+      body: { name, description },
     } = req;
-    const course = await Course.create({ name, user: req.user._id });
+    const course = await Course.create({
+      name,
+      user: req.user._id,
+      description,
+    });
     res.status(201).json(course);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -26,7 +30,7 @@ const getCourseById = async (req, res) => {
     const {
       params: { id },
     } = req;
-    const course = await Course.findOne(id);
+    const course = await Course.findById(id);
     if (!course) return res.status(404).json({ error: "Course not found" });
     res.status(200).json(course);
   } catch (error) {

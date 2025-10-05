@@ -2,8 +2,20 @@ import Flashcard from "../models/Flashcard.js";
 
 const getFlashcards = async (req, res) => {
   try {
-    const flashCards = await Flashcard.find();
-    res.status(200).json(flashCards);
+    const {
+      headers: { course },
+    } = req;
+    const flashcards = await Flashcard.find({ course: course });
+    res.status(200).json(flashcards);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const createFlashcard = async (req, res) => {
+  try {
+    const flashcard = await Flashcard.create(req.body);
+    res.status(200).json(flashcard);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -17,6 +29,7 @@ const getFlashcardById = async (req, res) => {
     const flashcard = await Flashcard.findById(id);
     if (!flashcard)
       return res.status(404).json({ error: "Flashcard not found" });
+    res.status(200).json(flashcard);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -50,4 +63,10 @@ const deleteFlashcard = async (req, res) => {
   }
 };
 
-export { getFlashcards, getFlashcardById, updateFlashcard, deleteFlashcard };
+export {
+  getFlashcards,
+  getFlashcardById,
+  updateFlashcard,
+  deleteFlashcard,
+  createFlashcard,
+};

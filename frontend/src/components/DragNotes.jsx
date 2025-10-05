@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Notes from "./Notes";
 
 const DragNotes = () => {

@@ -7,11 +7,12 @@ import {
   getFlashcardById,
   updateFlashcard,
   deleteFlashcard,
+  createFlashcard,
 } from "../controllers/flashcards.js";
 
 const flashcardRouter = Router();
 
-flashcardRouter.route("/").get(verifyToken, getFlashcards);
+flashcardRouter.route("/").get(getFlashcards).post(createFlashcard);
 flashcardRouter
   .route("/:id")
   .get(getFlashcardById)
