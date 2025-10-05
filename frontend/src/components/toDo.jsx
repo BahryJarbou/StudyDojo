@@ -3,7 +3,15 @@ import { useEffect } from "react";
 import { FiClock, FiTrash2 } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-const Todo = ({ removeElement, handleCheck, id, children, checked, time }) => {
+const Todo = ({
+  removeElement,
+  handleCheck,
+  id,
+  children,
+  checked,
+  time,
+  unit,
+}) => {
   const [isPresent, safeToRemove] = usePresence();
   const [scope, animate] = useAnimate();
 
@@ -69,7 +77,7 @@ const Todo = ({ removeElement, handleCheck, id, children, checked, time }) => {
       <div className="ml-auto flex gap-1.5">
         <div className="flex items-center gap-1.5 whitespace-nowrap rounded bg-zinc-800 px-1.5 py-1 text-xs text-zinc-400">
           <FiClock />
-          <span>{time}</span>
+          <span>{`${time} ${unit}`}</span>
         </div>
         <button
           onClick={() => removeElement(id)}

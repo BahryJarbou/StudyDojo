@@ -59,7 +59,7 @@ const CourseContent = () => {
               <input type="radio" name="my-accordion-3" />
               <div className="collapse-title font-semibold">To Do</div>
               <div className="collapse-content text-sm">
-                <VanishList />
+                <VanishList courseID={params.id} />
               </div>
             </div>
             <div className="collapse collapse-plus bg-base-100 border border-base-300">

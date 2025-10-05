@@ -1,5 +1,5 @@
 import { use, useState } from "react";
-import { FiPlus, FiRefreshCw } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import { motion } from "motion/react";
 import axios from "axios";
 import { FlashcardContext } from "../context/FlashcardsContext";
@@ -74,27 +74,6 @@ const AddFlashcard = ({ courseID }) => {
             className="btn btn-soft btn-success "
           >
             <span>Add FlashCard</span> <FiPlus />
-          </motion.button>
-          <motion.button
-            layout
-            onClick={() => {
-              axios
-                .get("http://localhost:3000/flashcards", {
-                  headers: {
-                    course: courseID,
-                  },
-                })
-                .then((res) => {
-                  console.log(res.data);
-                })
-                .catch(console.error)
-                .finally(() => {
-                  () => null;
-                });
-            }}
-            className="btn btn-soft btn-success "
-          >
-            <span>Refresh Stack</span> <FiRefreshCw />
           </motion.button>
         </>
       )}
