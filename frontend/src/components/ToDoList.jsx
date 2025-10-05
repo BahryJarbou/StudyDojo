@@ -1,19 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Todos from "./toDos";
 import Form from "./toDoForm";
 import Header from "./toDoHeader";
+import axios from "axios";
 
-const VanishList = () => {
+const VanishList = ({ courseID }) => {
   const [todos, setTodos] = useState([]);
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/todos", {
+        headers: { course: courseID },
+      })
+      .then((res) => setTodos(res.data))
+      .catch(console.error);
+  }, []);
+
   const handleCheck = (id) => {
+    axios
+      .put(`http://localhost:3000/todos/${id}`, {
+        checked: !todos.find((t) => t._id === id).checked,
+      })
+      .then(() => {})
+      .catch(console.error);
     setTodos((pv) =>
-      pv.map((t) => (t.id === id ? { ...t, checked: !t.checked } : t))
+      pv.map((t) => (t._id === id ? { ...t, checked: !t.checked } : t))
     );
   };
 
   const removeElement = (id) => {
-    setTodos((pv) => pv.filter((t) => t.id !== id));
+    axios
+      .delete(`http://localhost:3000/todos/${id}`)
+      .then((res) => console.log(res.data))
+      .catch(console.error);
+    setTodos((pv) => pv.filter((t) => t._id !== id));
   };
 
   return (
@@ -31,7 +51,7 @@ const VanishList = () => {
           handleCheck={handleCheck}
         />
       </div>
-      <Form setTodos={setTodos} />
+      <Form setTodos={setTodos} courseID={courseID} />
     </section>
   );
 };

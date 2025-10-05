@@ -2,8 +2,9 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
+import axios from "axios";
 
-const Form = ({ setTodos }) => {
+const Form = ({ setTodos, courseID }) => {
   const [visible, setVisible] = useState(false);
 
   const [time, setTime] = useState(15);
@@ -14,16 +15,18 @@ const Form = ({ setTodos }) => {
     if (!text.length) {
       return;
     }
-
-    setTodos((pv) => [
-      {
-        id: Math.random(),
-        text,
-        checked: false,
-        time: `${time} ${unit}`,
-      },
-      ...pv,
-    ]);
+    const todo = {
+      content: text,
+      checked: false,
+      time: `${time}`,
+      unit: `${unit}`,
+    };
+    axios
+      .post("http://localhost:3000/todos", todo, {
+        headers: { course: courseID },
+      })
+      .then((res) => setTodos((pv) => [...pv, res.data]))
+      .catch(console.error);
 
     setTime(15);
     setText("");

@@ -9,12 +9,13 @@ const Todos = ({ todos, handleCheck, removeElement }) => {
           <Todo
             handleCheck={handleCheck}
             removeElement={removeElement}
-            id={t.id}
-            key={t.id}
+            id={t._id}
+            key={t._id}
             checked={t.checked}
             time={t.time}
+            unit={t.unit}
           >
-            {t.text}
+            {t.content}
           </Todo>
         ))}
       </AnimatePresence>
