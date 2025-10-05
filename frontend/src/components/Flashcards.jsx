@@ -1,14 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import move from "lodash-move";
 import CardFlip from "./CardFlip";
+import axios from "axios";
 
-const FLASHCARDS = [
-  { question: "A", answer: "A" },
-  { question: "B", answer: "B" },
-  { question: "C", answer: "C" },
-  { question: "D", answer: "D" },
-];
 const CARD_OFFSET = 10;
 const SCALE_FACTOR = 0.06;
 
@@ -18,8 +13,28 @@ const cardStyle = {
   listStyle: "none",
 };
 
-const CardStack = () => {
-  const [cards, setCards] = useState(FLASHCARDS);
+const Flashcards = ({ courseID }) => {
+  const [cards, setCards] = useState([]);
+  useEffect(() => {
+    const token = `Bearer ${localStorage.getItem("token")}`;
+    if (token) {
+      axios
+        .get("http://localhost:3000/flashcards", {
+          headers: {
+            Authorization: token,
+            course: courseID,
+          },
+        })
+        .then((res) => {
+          setCards(res.data);
+        })
+        .catch(console.error)
+        .finally(() => {
+          () => null;
+        });
+    }
+  }, []);
+
   const moveToEnd = (from) => {
     setCards(move(cards, from, cards.length - 1));
   };
@@ -41,7 +56,7 @@ const CardStack = () => {
             animate={{
               top: 100 + index * -CARD_OFFSET,
               scale: 1 - index * SCALE_FACTOR,
-              zIndex: FLASHCARDS.length - index,
+              zIndex: cards.length - index,
             }}
             drag={canDrag ? "y" : false}
             dragConstraints={{
@@ -65,4 +80,4 @@ const CardStack = () => {
   );
 };
 
-export default CardStack;
+export default Flashcards;

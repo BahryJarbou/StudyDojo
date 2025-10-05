@@ -4,13 +4,17 @@ import { useWindowSize } from "./useWindowSize";
 import { useState, use } from "react";
 import { CoursesContext } from "../context/coursesContext";
 import { NavLink } from "react-router";
+import { deleteCourse } from "../../../backend/controllers/courses";
 
 const CoursesAccordion = () => {
-  const { courses } = use(CoursesContext);
+  const { courses, loading } = use(CoursesContext);
   const [open, setOpen] = useState(courses[0]._id);
-  return (
+
+  return !loading ? (
     <section className="p-4 bg-success">
-      <div className="flex flex-col lg:flex-row h-[70vh] lg:h-[70vh] w-[60vw] shrink-0 max-w-6xl mx-auto shadow overflow-hidden">
+      <div
+        className={`flex flex-col max-w-[85vw] w-[85vw] shrink-0 mx-auto shadow overflow-hidden`}
+      >
         {courses.map((course) => {
           return (
             <Panel
@@ -25,6 +29,8 @@ const CoursesAccordion = () => {
         })}
       </div>
     </section>
+  ) : (
+    <span className=" absolute translate-1/2 top-[50%] left-[50%] loading loading-spinner loading-xl"></span>
   );
 };
 
@@ -32,26 +38,46 @@ const Panel = ({ open, setOpen, id, title, description }) => {
   const { width } = useWindowSize();
   const isOpen = open === id;
 
+  const { deleteCourse, updateCourse } = use(CoursesContext);
+  const [form, setForm] = useState({
+    name: title,
+    description: description,
+    ytEmbed: "",
+    spotifyEmbed: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    // e.preventDefault();
+    updateCourse({ id, ...form });
+  };
+
   return (
     <>
       <button
-        className="bg-base-100 text-success hover:text-base-100 hover:bg-slate-50 transition-colors p-3 border-r-[1px] border-b-[1px] border-base-200 flex flex-row-reverse lg:flex-col justify-end items-center gap-4 relative group"
+        className="bg-base-100 text-success hover:text-base-100 hover:bg-slate-50 transition-colors p-3 border-r-[1px] border-b-[1px] border-base-200 flex flex-row-reverse  justify-end items-center gap-4 relative group"
         onClick={() => setOpen(id)}
       >
         <span
           style={{
             writingMode: "vertical-lr",
           }}
-          className="hidden lg:block text-xl font-light rotate-180"
+          className="hidden text-xl font-light rotate-180"
         >
           {title}
         </span>
-        <span className="block lg:hidden text-xl font-light">{title}</span>
-        <div className="w-6 lg:w-full aspect-square bg-success text-white grid place-items-center">
+        <span className="block text-xl font-light">{title}</span>
+        <div className="w-6 aspect-square bg-success text-white grid place-items-center">
           <FiBook />
         </div>
 
-        <span className="w-4 h-4 bg-base-100 group-hover:bg-slate-50 transition-colors border-r-[1px] border-b-[1px] lg:border-b-0 lg:border-t-[1px] border-base-200 rotate-45 absolute bottom-0 lg:bottom-[50%] right-[50%] lg:right-0 translate-y-[50%] translate-x-[50%] z-20" />
+        <span
+          className="w-4 h-4 bg-base-100 group-hover:bg-slate-50 transition-colors border-r-[1px] border-b-[1px]  border-base-200 rotate-45 absolute bottom-0  right-[50%] 
+         translate-y-[50%] translate-x-[50%] z-20"
+        />
       </button>
 
       <AnimatePresence>
@@ -68,20 +94,121 @@ const Panel = ({ open, setOpen, id, title, description }) => {
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}
-            className="w-full h-full overflow-hidden relative bg-black flex items-end"
+            className="min-w-full h-full overflow-hidden relative bg-black flex items-end"
           >
             <motion.div
               variants={descriptionVariants}
               initial="closed"
               animate="open"
               exit="closed"
-              className="flex flex-col w-full justify-between h-full shrink-0 px-4 py-2 bg-black/60 backdrop-blur-sm text-white"
+              className="flex flex-col w-full justify-between grow shrink-0 px-4 py-2 bg-black/60 backdrop-blur-sm text-white"
             >
-              <p className="text-success">{description}</p>
+              <p className="text-success whitespace-pre-wrap">{description}</p>
               <div className="flex place-self-end gap-4 justify-self-end justify-end">
-                <button className="btn btn-soft btn-success btn-xs md:btn-md lg:btn-xl">
-                  Edit Course
+                <button
+                  className="btn btn-soft btn-success btn-xs md:btn-md lg:btn-xl"
+                  onClick={() =>
+                    document.getElementById("my_modal_2").showModal()
+                  }
+                >
+                  Update Course
                 </button>
+                <dialog
+                  id="my_modal_2"
+                  className="modal modal-backdrop text-success"
+                >
+                  <div className="modal-box max-w-screen w-screen lg:h-fit lg:w-fit">
+                    <h3 className="font-bold text-lg">Course Data</h3>
+                    <div className="modal-action flex-col">
+                      <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn btn-sm btn-circle btn-ghost text-success absolute right-2 top-2">
+                          ✕
+                        </button>
+                      </form>
+                      <form
+                        method="dialog"
+                        onSubmit={handleSubmit}
+                        className="flex items-center justify-center p-8 rounded shadow-md w-[90vw]"
+                      >
+                        <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-[100%] lg:w-[100%] border p-4">
+                          <legend className="fieldset-legend lg:text-4xl text-success">
+                            Update Course
+                          </legend>
+
+                          <label className="label" htmlFor="name">
+                            Name *
+                          </label>
+                          <input
+                            className="input validator border-success w-full"
+                            required
+                            placeholder="enter course's name"
+                            id="name"
+                            name="name"
+                            value={form.name}
+                            onChange={handleChange}
+                            autoComplete="course name"
+                          />
+
+                          <label className="label" htmlFor="description">
+                            Description
+                          </label>
+                          <textarea
+                            className="input validator border-success w-full text-wrap"
+                            placeholder="description"
+                            minlength="8"
+                            id="description"
+                            name="description"
+                            value={form.description}
+                            onChange={handleChange}
+                            autoComplete="description"
+                          />
+
+                          <label className="label" htmlFor="ytEmbed">
+                            Youtube Embed Link
+                          </label>
+                          <textarea
+                            className="input validator border-success w-full text-wrap"
+                            placeholder="ytEmbed"
+                            minlength="8"
+                            id="ytEmbed"
+                            name="ytEmbed"
+                            value={form.ytEmbed}
+                            onChange={handleChange}
+                            autoComplete="ytEmbed"
+                          />
+
+                          <label className="label" htmlFor="spotifyEmbed">
+                            Spotify Embed Link
+                          </label>
+                          <textarea
+                            className="input validator border-success w-full text-wrap"
+                            placeholder="spotifyEmbed"
+                            minlength="8"
+                            id="spotifyEmbed"
+                            name="spotifyEmbed"
+                            value={form.spotifyEmbed}
+                            onChange={handleChange}
+                            autoComplete="spotifyEmbed"
+                          />
+
+                          <button className="btn btn-soft btn-success mt-4">
+                            Update
+                          </button>
+                        </fieldset>
+                      </form>
+                      <button
+                        onClick={() => {
+                          deleteCourse(id);
+                          document.getElementById("my_modal_2").close();
+                        }}
+                        className="btn btn-soft btn-warning mt-4"
+                      >
+                        Delete Course
+                      </button>
+                    </div>
+                  </div>
+                </dialog>
                 <NavLink
                   to={`${id}`}
                   className="btn btn-soft btn-success btn-xs md:btn-md lg:btn-xl"
@@ -101,7 +228,7 @@ export default CoursesAccordion;
 
 const panelVariants = {
   open: {
-    width: "100%",
+    width: "60vw",
     height: "100%",
   },
   closed: {
