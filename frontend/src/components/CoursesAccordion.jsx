@@ -23,6 +23,7 @@ const CoursesAccordion = () => {
               id={course._id}
               title={course.name}
               description={course.description || ""}
+              youtube={course.youtube || ""}
             />
           );
         })}
@@ -33,7 +34,7 @@ const CoursesAccordion = () => {
   );
 };
 
-const Panel = ({ open, setOpen, id, title, description }) => {
+const Panel = ({ open, setOpen, id, title, description, youtube }) => {
   const { width } = useWindowSize();
   const isOpen = open === id;
 
@@ -41,8 +42,8 @@ const Panel = ({ open, setOpen, id, title, description }) => {
   const [form, setForm] = useState({
     name: title,
     description: description,
-    ytEmbed: "",
-    spotifyEmbed: "",
+    youtube: youtube,
+    spotify: "",
   });
 
   const handleChange = (e) => {
@@ -163,32 +164,32 @@ const Panel = ({ open, setOpen, id, title, description }) => {
                             autoComplete="description"
                           />
 
-                          <label className="label" htmlFor="ytEmbed">
+                          <label className="label" htmlFor="youtube">
                             Youtube Embed Link
                           </label>
                           <textarea
                             className="input validator border-success w-full text-wrap"
-                            placeholder="ytEmbed"
+                            placeholder="youtube"
                             minlength="8"
-                            id="ytEmbed"
-                            name="ytEmbed"
-                            value={form.ytEmbed}
+                            id="youtube"
+                            name="youtube"
+                            value={form.youtube}
                             onChange={handleChange}
-                            autoComplete="ytEmbed"
+                            autoComplete="youtube"
                           />
 
-                          <label className="label" htmlFor="spotifyEmbed">
+                          <label className="label" htmlFor="spotify">
                             Spotify Embed Link
                           </label>
                           <textarea
                             className="input validator border-success w-full text-wrap"
-                            placeholder="spotifyEmbed"
+                            placeholder="spotify"
                             minlength="8"
-                            id="spotifyEmbed"
-                            name="spotifyEmbed"
-                            value={form.spotifyEmbed}
+                            id="spotify"
+                            name="spotify"
+                            value={form.spotify}
                             onChange={handleChange}
-                            autoComplete="spotifyEmbed"
+                            autoComplete="spotify"
                           />
 
                           <button className="btn btn-soft btn-success mt-4">
