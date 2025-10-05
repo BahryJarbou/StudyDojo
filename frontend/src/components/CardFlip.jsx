@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { motion } from "motion/react";
 import Card from "./Card";
 
-const CardFlip = ({ question, answer, flippable }) => {
+const CardFlip = ({ question, answer, flippable, id, setCards }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const state = useRef({ y: 0 });
@@ -21,6 +21,7 @@ const CardFlip = ({ question, answer, flippable }) => {
       setIsAnimating(true);
     }
   };
+
   return (
     <div className="flex items-center justify-center bg-black cursor-pointer">
       <div
@@ -38,10 +39,15 @@ const CardFlip = ({ question, answer, flippable }) => {
           }}
         >
           <div className="flip-card-front">
-            <Card title="Question" content={question} />
+            <Card
+              title="Question"
+              content={question}
+              id={id}
+              setCards={setCards}
+            />
           </div>
           <div className="flip-card-back">
-            <Card title="Answer" content={answer} />
+            <Card title="Answer" content={answer} id={id} setCards={setCards} />
           </div>
         </motion.div>
       </div>

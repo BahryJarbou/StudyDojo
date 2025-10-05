@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import move from "lodash-move";
 import CardFlip from "./CardFlip";
 import axios from "axios";
+import AddFlashcard from "./AddFlashcard";
+import { FlashcardContext } from "../context/FlashcardsContext";
 
 const CARD_OFFSET = 10;
 const SCALE_FACTOR = 0.06;
@@ -14,6 +16,20 @@ const cardStyle = {
 };
 
 const Flashcards = ({ courseID }) => {
+  return (
+    <section className="relative min-h-screen w-full place-content-center overflow-hidden bg-neutral-950 ">
+      <AddFlashcard courseID={courseID} />
+      <FlashcardsStack courseID={courseID} />
+    </section>
+    // <div className="relative flex justify-center items-center height-screen">
+    // </div>
+  );
+};
+
+export default Flashcards;
+
+const FlashcardsStack = ({ courseID }) => {
+  const { hasChanged } = use(FlashcardContext);
   const [cards, setCards] = useState([]);
   useEffect(() => {
     const token = `Bearer ${localStorage.getItem("token")}`;
@@ -33,21 +49,19 @@ const Flashcards = ({ courseID }) => {
           () => null;
         });
     }
-  }, []);
+  }, [hasChanged]);
 
   const moveToEnd = (from) => {
     setCards(move(cards, from, cards.length - 1));
   };
-
   return (
-    // <div className="relative flex justify-center items-center height-screen">
     <ul className="relative w-full h-[70vh] ">
       {cards.map((flashCard, index) => {
         const canDrag = index === 0;
 
         return (
           <motion.li
-            key={flashCard.question}
+            key={flashCard._id}
             style={{
               ...cardStyle,
               backgroundColor: "gray",
@@ -71,13 +85,12 @@ const Flashcards = ({ courseID }) => {
               question={flashCard.question}
               answer={flashCard.answer}
               flippable={canDrag}
+              id={flashCard._id}
+              setCards={setCards}
             />
           </motion.li>
         );
       })}
     </ul>
-    // </div>
   );
 };
-
-export default Flashcards;

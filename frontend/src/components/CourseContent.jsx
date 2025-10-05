@@ -14,24 +14,28 @@ const CourseContent = () => {
       .get(`http://localhost:3000/courses/${params.id}`)
       .then((res) => {
         setCourse(res.data);
-        console.log(res.data);
       })
       .catch(console.error)
       .finally(setLoading(false));
   }, []);
+
   return !loading ? (
     <div className="flex flex-col gap-[2rem] shrink-0 w-[98vw] justify-center items-center">
       <h1 className="text-3xl text-primary font-bold">{course.name}</h1>
-      <iframe
-        width="1120"
-        height="630"
-        src="https://www.youtube.com/embed/videoseries?si=p1mieRkiec1BuMnf&amp;list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
+      {course.youtube && (
+        <div className="w-[90vw] h-[45vw]">
+          <iframe
+            width="100%"
+            height="100%"
+            src={`${course.youtube}`}
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+      )}
       <div className="tabs shrink-0 w-[97vw] tabs-lift px-4">
         <input
           type="radio"
@@ -47,7 +51,7 @@ const CourseContent = () => {
               <div className="collapse-title font-semibold">
                 Course Discription
               </div>
-              <div className="collapse-content text-sm">
+              <div className="collapse-content text-sm whitespace-pre-wrap">
                 {course.description}
               </div>
             </div>

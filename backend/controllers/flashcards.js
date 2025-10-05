@@ -14,7 +14,10 @@ const getFlashcards = async (req, res) => {
 
 const createFlashcard = async (req, res) => {
   try {
-    const flashcard = await Flashcard.create(req.body);
+    const {
+      headers: { course },
+    } = req;
+    const flashcard = await Flashcard.create({ ...req.body, course });
     res.status(200).json(flashcard);
   } catch (error) {
     res.status(500).json({ error: error.message });

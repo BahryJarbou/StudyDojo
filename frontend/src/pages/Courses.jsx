@@ -21,7 +21,7 @@ const Courses = () => {
   return !loading ? (
     !user ? (
       <Navigate to="/" />
-    ) : (
+    ) : !loading ? (
       <div className="flex flex-col justify-center gap-[4vh] shrink-0">
         {/* Open the modal using document.getElementById('ID').showModal() method */}
         <button
@@ -91,6 +91,8 @@ const Courses = () => {
 
         <CoursesAccordion />
       </div>
+    ) : (
+      <span className=" absolute translate-1/2 top-[50%] left-[50%] loading loading-spinner loading-xl"></span>
     )
   ) : (
     <span className=" absolute translate-1/2 top-[50%] left-[50%] loading loading-spinner loading-xl"></span>
