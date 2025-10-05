@@ -1,5 +1,3 @@
-import CourseContent from "../components/CourseContent";
-import Home from "./Home";
 import { AuthContext } from "../context/AuthProvider";
 import { use, useState } from "react";
 import { Navigate } from "react-router";
