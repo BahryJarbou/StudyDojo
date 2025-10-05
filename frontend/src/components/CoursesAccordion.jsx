@@ -4,7 +4,6 @@ import { useWindowSize } from "./useWindowSize";
 import { useState, use } from "react";
 import { CoursesContext } from "../context/coursesContext";
 import { NavLink } from "react-router";
-import { deleteCourse } from "../../../backend/controllers/courses";
 
 const CoursesAccordion = () => {
   const { courses, loading } = use(CoursesContext);
