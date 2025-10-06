@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Article from "./Article";
 import DropIndicator from "./DropIndicator";
 import AddArticle from "./AddArticle";
 import ArticleModal from "./ArticleModal";

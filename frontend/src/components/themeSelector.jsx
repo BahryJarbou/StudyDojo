@@ -1,7 +1,7 @@
 import { FiChevronDown } from "react-icons/fi";
 import { IoMdColorPalette } from "react-icons/io";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const ThemeSelector = () => {
   const [open, setOpen] = useState(false);

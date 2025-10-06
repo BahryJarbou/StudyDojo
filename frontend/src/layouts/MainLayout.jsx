@@ -1,9 +1,8 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Outlet } from "react-router";
-import { use, useEffect, useState } from "react";
+import { use } from "react";
 import { AuthContext } from "../context/AuthProvider";
-import axios from "axios";
 import { CoursesContext } from "../context/coursesContext";
 
 const MainLayout = () => {
