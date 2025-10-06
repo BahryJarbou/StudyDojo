@@ -28,7 +28,7 @@ const MainLayout = () => {
                   </label>
                 }
               />
-              <main className="flex-grow p-4">
+              <main className="flex-grow max-w-full max-h-full p-4">
                 <Outlet />
               </main>
               <Footer />
@@ -56,7 +56,7 @@ const MainLayout = () => {
         {/* Page content here */}
         <div className="min-h-screen flex flex-col backdrop-blur-sm gap-4 items-center justify-between w-full">
           <Navbar />
-          <div className="flex-grow p-4">
+          <div className="flex-grow max-h-full max-w-full p-4">
             <Outlet />
           </div>
           <Footer />

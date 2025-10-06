@@ -4,6 +4,7 @@ import DragNotes from "./DragNotes";
 import VanishList from "./ToDoList";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Articles from "./Articles";
 
 const CourseContent = () => {
   const [course, setCourse] = useState({});
@@ -20,8 +21,8 @@ const CourseContent = () => {
   }, []);
 
   return !loading ? (
-    <div className="flex flex-col gap-[2rem] shrink-0 w-[98vw] justify-center items-center">
-      <h1 className="text-3xl text-primary font-bold">{course.name}</h1>
+    <div className="flex flex-col gap-[2rem] shrink-0 w-[90vw] justify-center items-center">
+      <h1 className="text-3xl text-success font-bold">{course.name}</h1>
       {course.youtube && (
         <div className="w-[90vw] h-[45vw]">
           <iframe
@@ -40,7 +41,7 @@ const CourseContent = () => {
         <input
           type="radio"
           name="my_tabs_3"
-          className="tab w-[50%] bg-base-300"
+          className="tab text-success"
           aria-label="Course Info"
           defaultChecked
         />
@@ -88,10 +89,10 @@ const CourseContent = () => {
         <input
           type="radio"
           name="my_tabs_3"
-          className="tab w-[50%] bg-base-300"
+          className="tab text-success"
           aria-label="Course Content"
         />
-        <div className="tab-content bg-base-100 border-base-300 p-6">
+        <div className="tab-content  bg-base-100 border-base-300 p-6">
           <div className="join join-vertical bg-base-100 w-full">
             <div className="collapse collapse-plus bg-base-100 border border-base-300">
               <input type="radio" name="my-accordion-3" defaultChecked />
@@ -109,22 +110,9 @@ const CourseContent = () => {
             </div>
             <div className="collapse collapse-plus bg-base-100 border border-base-300">
               <input type="radio" name="my-accordion-3" />
-              <div className="collapse-title font-semibold">Progress</div>
+              <div className="collapse-title font-semibold">Articles</div>
               <div className="collapse-content text-sm justify-self-center">
-                <div
-                  className="radial-progress text-success"
-                  style={
-                    {
-                      "--value": "70",
-                      "--size": "12rem",
-                      "--thickness": "2rem",
-                    } /* as React.CSSProperties */
-                  }
-                  aria-valuenow={70}
-                  role="progressbar"
-                >
-                  70%
-                </div>
+                <Articles />
               </div>
             </div>
           </div>

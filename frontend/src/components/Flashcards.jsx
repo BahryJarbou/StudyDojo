@@ -17,8 +17,8 @@ const cardStyle = {
 
 const Flashcards = ({ courseID }) => {
   return (
-    <section className="relative min-h-screen w-full place-content-center overflow-hidden bg-neutral-950 ">
-      <AddFlashcard courseID={courseID} />
+    <section className="relative flex justify-center items-center min-h-screen w-full place-content-center overflow-hidden bg-neutral-950">
+      {/* <AddFlashcard courseID={courseID} /> */}
       <FlashcardsStack courseID={courseID} />
     </section>
     // <div className="relative flex justify-center items-center height-screen">
@@ -55,7 +55,7 @@ const FlashcardsStack = ({ courseID }) => {
     setCards(move(cards, from, cards.length - 1));
   };
   return (
-    <ul className="relative w-full h-[70vh] ">
+    <ul className="relative w-full h-[70vh] !list-none !m-0 !p-0">
       {cards.map((flashCard, index) => {
         const canDrag = index === 0;
 
