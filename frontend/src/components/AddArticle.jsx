@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { motion } from "motion/react";
-import { useEffect } from "react";
 import axios from "axios";
 import "../server.js";
 

@@ -1,4 +1,3 @@
-const login = () => {};
 import { useState, use } from "react";
 import { AuthContext } from "../context/AuthProvider.jsx";
 import { Navigate } from "react-router";
