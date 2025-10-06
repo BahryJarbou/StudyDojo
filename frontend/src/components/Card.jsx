@@ -1,5 +1,5 @@
 import axios from "axios";
-import "../server.js";
+import hostURL from "../server.js";
 
 const Card = ({ title, content, id, setCards }) => {
   const deleteCard = () => {

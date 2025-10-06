@@ -4,8 +4,7 @@ import move from "lodash-move";
 import CardFlip from "./CardFlip";
 import axios from "axios";
 import { FlashcardContext } from "../context/FlashcardsContext";
-import "../server.js";
-
+import hostURL from "../server.js";
 const CARD_OFFSET = 10;
 const SCALE_FACTOR = 0.06;
 

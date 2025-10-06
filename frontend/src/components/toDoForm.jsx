@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
 import axios from "axios";
-import "../server.js";
+import hostURL from "../server.js";
 
 const Form = ({ setTodos, courseID }) => {
   const [visible, setVisible] = useState(false);

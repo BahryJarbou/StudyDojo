@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import "../server.js";
+import hostURL from "../server.js";
 
 const AuthContext = createContext();
 
@@ -11,6 +11,7 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(hostURL);
     const token = `Bearer ${localStorage.getItem("token")}`;
     if (token) {
       axios

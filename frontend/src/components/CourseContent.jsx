@@ -5,7 +5,7 @@ import VanishList from "./ToDoList";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Articles from "./Articles";
-import "../server.js";
+import hostURL from "../server.js";
 
 const CourseContent = () => {
   const [course, setCourse] = useState({});

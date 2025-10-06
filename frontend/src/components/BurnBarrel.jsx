@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { FaFire } from "react-icons/fa";
 import { FiTrash } from "react-icons/fi";
-import "../server.js";
+import hostURL from "../server.js";
 
 const BurnBarrel = ({ setArticles }) => {
   const [active, setActive] = useState(false);
