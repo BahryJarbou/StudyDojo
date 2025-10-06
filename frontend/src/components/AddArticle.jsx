@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { motion } from "motion/react";
 import axios from "axios";
-import "../server.js";
+import hostURL from "../server.js";
 
 const AddArticle = ({ column, setArticles, courseID }) => {
   const [title, setTitle] = useState("");

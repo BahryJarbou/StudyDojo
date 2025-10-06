@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import "../server.js";
+import hostURL from "../server.js";
 
 const CoursesContext = createContext();
 

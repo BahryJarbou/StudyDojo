@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Column from "./Column";
 import BurnBarrel from "./BurnBarrel";
 import axios from "axios";
-import "../server.js";
+import hostURL from "../server.js";
 
 const Board = ({ courseID }) => {
   const [articles, setArticles] = useState([]);

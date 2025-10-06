@@ -3,7 +3,7 @@ import Todos from "./toDos";
 import Form from "./toDoForm";
 import Header from "./toDoHeader";
 import axios from "axios";
-import "../server.js";
+import hostURL from "../server.js";
 
 const VanishList = ({ courseID }) => {
   const [todos, setTodos] = useState([]);

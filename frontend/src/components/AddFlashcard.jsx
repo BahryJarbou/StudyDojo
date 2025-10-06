@@ -3,7 +3,7 @@ import { FiPlus } from "react-icons/fi";
 import { motion } from "motion/react";
 import axios from "axios";
 import { FlashcardContext } from "../context/FlashcardsContext";
-import "../server.js";
+import hostURL from "../server.js";
 
 const AddFlashcard = ({ courseID }) => {
   const { setHasChanged } = use(FlashcardContext);
