@@ -15,7 +15,7 @@ const Column = ({
   const [active, setActive] = useState(false);
 
   const handleDragStart = (e, article) => {
-    e.dataTransfer.setData("articleId", article.id);
+    e.dataTransfer.setData("articleId", article._id);
   };
 
   const handleDragOver = (e) => {
@@ -26,6 +26,7 @@ const Column = ({
 
   const handleDragEnd = (e) => {
     const articleId = e.dataTransfer.getData("articleId");
+    console.log(articleId);
 
     setActive(false);
     clearHighlights();
@@ -38,18 +39,18 @@ const Column = ({
     if (before !== articleId) {
       let copy = [...articles];
 
-      let articleToTransfer = copy.find((c) => c.id === articleId);
+      let articleToTransfer = copy.find((c) => c._id === articleId);
       if (!articleToTransfer) return;
       articleToTransfer = { ...articleToTransfer, column };
 
-      copy = copy.filter((c) => c.id !== articleId);
+      copy = copy.filter((c) => c._id !== articleId);
 
       const moveToBack = before === "-1";
 
       if (moveToBack) {
         copy.push(articleToTransfer);
       } else {
-        const instertAtIndex = copy.findIndex((el) => el.id === before);
+        const instertAtIndex = copy.findIndex((el) => el._id === before);
         if (instertAtIndex === undefined) return;
 
         copy.splice(instertAtIndex, 0, articleToTransfer);
@@ -121,7 +122,11 @@ const Column = ({
           return (
             <ArticleModal
               key={c._id}
-              {...c}
+              _id={c._id}
+              title={c.title}
+              content={c.content}
+              column={c.column}
+              course={c.course}
               handleDragStart={handleDragStart}
             />
           );

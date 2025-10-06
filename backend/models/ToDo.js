@@ -5,7 +5,11 @@ const toDoSchema = new Schema({
   time: { type: Number, required: [true, "time is required"] },
   checked: { type: Boolean, required: [true, "checked is required"] },
   unit: { type: String, required: [true, "unit is required"] },
-  course: { type: Schema.Types.String, ref: "Course" },
+  course: {
+    type: Schema.Types.String,
+    ref: "Course",
+    required: [true, "course ref is required"],
+  },
 });
 
 export default model("ToDo", toDoSchema);

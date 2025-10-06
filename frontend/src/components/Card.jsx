@@ -1,9 +1,10 @@
 import axios from "axios";
+import "../server.js";
 
 const Card = ({ title, content, id, setCards }) => {
   const deleteCard = () => {
     axios
-      .delete(`http://localhost:3000/flashcards/${id}`)
+      .delete(`${hostURL}/flashcards/${id}`)
       .then((res) => setCards((pv) => pv.filter((card) => card._id !== id)))
       .catch(console.error)
       .finally(() => null);

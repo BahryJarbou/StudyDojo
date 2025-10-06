@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { motion } from "framer-motion";
 import axios from "axios";
+import "../server.js";
 
 const Form = ({ setTodos, courseID }) => {
   const [visible, setVisible] = useState(false);
@@ -22,7 +23,7 @@ const Form = ({ setTodos, courseID }) => {
       unit: `${unit}`,
     };
     axios
-      .post("http://localhost:3000/todos", todo, {
+      .post(`${hostURL}/todos`, todo, {
         headers: { course: courseID },
       })
       .then((res) => setTodos((pv) => [...pv, res.data]))

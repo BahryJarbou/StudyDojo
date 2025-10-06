@@ -12,19 +12,20 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 
-const ArticleModal = ({ title, content, id, column, handleDragStart }) => {
+const ArticleModal = ({ title, content, _id, column, handleDragStart }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <div className=" bg-neutral-950">
       <>
-        <DropIndicator beforeId={id} column={column} />
+        <DropIndicator beforeId={_id} column={column} />
         <motion.div
           layout
-          layoutId={id}
+          layoutId={_id}
           draggable="true"
-          onDragStart={(e) => handleDragStart(e, { title, id, column })}
-          onTouchStart={(e) => handleDragStart(e, { title, id, column })}
+          onDragStart={(e) =>
+            handleDragStart(e, { title, content, _id, column })
+          }
           onClick={() => setOpen(true)}
           className="cursor-grab rounded border border-neutral-700 bg-neutral-800 p-3 active:cursor-grabbing"
         >
