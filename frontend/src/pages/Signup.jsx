@@ -20,7 +20,7 @@ const Signup = () => {
     !user ? (
       <form
         onSubmit={handleSubmit}
-        className="flex items-center justify-center p-8 rounded shadow-md j w-screen"
+        className="flex items-center justify-center p-8 rounded shadow-md j w-[95vw]"
       >
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-[90%] lg:w-[70%] border p-4">
           <legend className="fieldset-legend lg:text-4xl text-success">

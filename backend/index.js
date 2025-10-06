@@ -8,6 +8,7 @@ import noteRouter from "./routes/noteRouter.js";
 import flashcardRouter from "./routes/flashcardRouter.js";
 import toDoRouter from "./routes/toDoRouter.js";
 import authRouter from "./routes/authRouter.js";
+import articleRouter from "./routes/articleRouter.js";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -20,6 +21,7 @@ app.use("/courses", courseRouter);
 app.use("/notes", noteRouter);
 app.use("/flashcards", flashcardRouter);
 app.use("/todos", toDoRouter);
+app.use("/articles", articleRouter);
 app.use("/auth", authRouter);
 
 app.listen(port, () => {
