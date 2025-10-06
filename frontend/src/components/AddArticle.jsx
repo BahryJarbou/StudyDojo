@@ -3,6 +3,7 @@ import { FiPlus } from "react-icons/fi";
 import { motion } from "motion/react";
 import { useEffect } from "react";
 import axios from "axios";
+import "../server.js";
 
 const AddArticle = ({ column, setArticles, courseID }) => {
   const [title, setTitle] = useState("");
@@ -16,9 +17,10 @@ const AddArticle = ({ column, setArticles, courseID }) => {
       title: title.trim(),
       content: content,
     };
+    console.log(courseID);
 
     axios
-      .post("http://localhost:3000/articles", newArticle, {
+      .post(`${hostURL}/articles`, newArticle, {
         headers: { course: courseID },
       })
       .then((res) => setArticles((pv) => [...pv, res.data]))

@@ -3,6 +3,7 @@ import { FiPlus } from "react-icons/fi";
 import { motion } from "motion/react";
 import axios from "axios";
 import { FlashcardContext } from "../context/FlashcardsContext";
+import "../server.js";
 
 const AddFlashcard = ({ courseID }) => {
   const { setHasChanged } = use(FlashcardContext);
@@ -20,7 +21,7 @@ const AddFlashcard = ({ courseID }) => {
     };
 
     axios
-      .post("http://localhost:3000/flashcards", newCard, {
+      .post(`${hostURL}/flashcards`, newCard, {
         headers: {
           course: courseID,
         },

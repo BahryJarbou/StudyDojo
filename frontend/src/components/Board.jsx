@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import Column from "./Column";
 import BurnBarrel from "./BurnBarrel";
 import axios from "axios";
+import "../server.js";
 
 const Board = ({ courseID }) => {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/articles", {
+      .get(`${hostURL}/articles`, {
         headers: { course: courseID },
       })
       .then((res) => setArticles(res.data))

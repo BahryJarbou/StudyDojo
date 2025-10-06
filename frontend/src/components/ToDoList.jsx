@@ -3,13 +3,14 @@ import Todos from "./toDos";
 import Form from "./toDoForm";
 import Header from "./toDoHeader";
 import axios from "axios";
+import "../server.js";
 
 const VanishList = ({ courseID }) => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/todos", {
+      .get(`${hostURL}/todos`, {
         headers: { course: courseID },
       })
       .then((res) => setTodos(res.data))
@@ -18,7 +19,7 @@ const VanishList = ({ courseID }) => {
 
   const handleCheck = (id) => {
     axios
-      .put(`http://localhost:3000/todos/${id}`, {
+      .put(`${hostURL}/todos/${id}`, {
         checked: !todos.find((t) => t._id === id).checked,
       })
       .then(() => {})
@@ -30,7 +31,7 @@ const VanishList = ({ courseID }) => {
 
   const removeElement = (id) => {
     axios
-      .delete(`http://localhost:3000/todos/${id}`)
+      .delete(`${hostURL}/todos/${id}`)
       .then((res) => console.log(res.data))
       .catch(console.error);
     setTodos((pv) => pv.filter((t) => t._id !== id));

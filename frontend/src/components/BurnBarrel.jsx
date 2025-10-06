@@ -1,6 +1,8 @@
+import axios from "axios";
 import { useState } from "react";
 import { FaFire } from "react-icons/fa";
 import { FiTrash } from "react-icons/fi";
+import "../server.js";
 
 const BurnBarrel = ({ setArticles }) => {
   const [active, setActive] = useState(false);
@@ -15,8 +17,10 @@ const BurnBarrel = ({ setArticles }) => {
 
   const handleDragEnd = (e) => {
     const articleId = e.dataTransfer.getData("articleId");
-    console.log(articleId);
-    setArticles((pv) => pv.filter((c) => c.id !== articleId));
+    axios
+      .delete(`${hostURL}/articles/${articleId}`)
+      .then((res) => setArticles((pv) => pv.filter((c) => c._id !== articleId)))
+      .catch(console.error);
     setActive(false);
   };
 

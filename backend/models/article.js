@@ -3,7 +3,12 @@ import { Schema, model } from "mongoose";
 const articleSchema = new Schema({
   title: { type: String, required: [true, "title is required"] },
   content: { type: String, required: [true, "content is required"] },
-  course: { type: Schema.Types.ObjectId, ref: "Course" },
+  column: { type: String, required: [true, "column is required"] },
+  course: {
+    type: Schema.Types.ObjectId,
+    ref: "Course",
+    required: [true, "course ref is required"],
+  },
 });
 
 export default model("Article", articleSchema);

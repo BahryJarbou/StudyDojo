@@ -5,6 +5,7 @@ import VanishList from "./ToDoList";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Articles from "./Articles";
+import "../server.js";
 
 const CourseContent = () => {
   const [course, setCourse] = useState({});
@@ -12,7 +13,7 @@ const CourseContent = () => {
   const params = useParams();
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/courses/${params.id}`)
+      .get(`${hostURL}/courses/${params.id}`)
       .then((res) => {
         setCourse(res.data);
       })
@@ -112,7 +113,7 @@ const CourseContent = () => {
               <input type="radio" name="my-accordion-3" />
               <div className="collapse-title font-semibold">Articles</div>
               <div className="collapse-content text-sm justify-self-center">
-                <Articles />
+                <Articles courseID={params.id} />
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import "../server.js";
 
 const CoursesContext = createContext();
 
@@ -11,7 +12,7 @@ const CoursesProvider = ({ children }) => {
     const token = `Bearer ${localStorage.getItem("token")}`;
     if (token) {
       axios
-        .get("http://localhost:3000/courses", {
+        .get(`${hostURL}/courses`, {
           headers: { Authorization: token },
         })
         .then((res) => {
@@ -29,7 +30,7 @@ const CoursesProvider = ({ children }) => {
   const createCourse = async ({ name, description }) => {
     const token = `Bearer ${localStorage.getItem("token")}`;
     const { data } = await axios.post(
-      "http://localhost:3000/courses",
+      `${hostURL}/courses`,
       {
         name,
         description,
@@ -42,7 +43,7 @@ const CoursesProvider = ({ children }) => {
   const updateCourse = async ({ id, name, description, youtube, spotify }) => {
     const token = `Bearer ${localStorage.getItem("token")}`;
     const { data } = await axios.put(
-      `http://localhost:3000/courses/${id}`,
+      `${hostURL}/courses/${id}`,
       { name, description, youtube, spotify },
       { headers: { Authorization: token } }
     );
@@ -52,12 +53,9 @@ const CoursesProvider = ({ children }) => {
 
   const deleteCourse = async (courseID) => {
     const token = `Bearer ${localStorage.getItem("token")}`;
-    const { data } = await axios.delete(
-      `http://localhost:3000/courses/${courseID}`,
-      {
-        headers: { Authorization: token },
-      }
-    );
+    const { data } = await axios.delete(`${hostURL}/courses/${courseID}`, {
+      headers: { Authorization: token },
+    });
     setCourses((pv) => pv.filter((course) => course._id !== courseID));
   };
 

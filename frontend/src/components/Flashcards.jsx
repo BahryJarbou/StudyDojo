@@ -5,6 +5,7 @@ import CardFlip from "./CardFlip";
 import axios from "axios";
 import AddFlashcard from "./AddFlashcard";
 import { FlashcardContext } from "../context/FlashcardsContext";
+import "../server.js";
 
 const CARD_OFFSET = 10;
 const SCALE_FACTOR = 0.06;
@@ -35,7 +36,7 @@ const FlashcardsStack = ({ courseID }) => {
     const token = `Bearer ${localStorage.getItem("token")}`;
     if (token) {
       axios
-        .get("http://localhost:3000/flashcards", {
+        .get(`${hostURL}/flashcards`, {
           headers: {
             Authorization: token,
             course: courseID,

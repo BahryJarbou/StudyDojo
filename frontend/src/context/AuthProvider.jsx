@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import "../server.js";
 
 const AuthContext = createContext();
 
@@ -13,7 +14,7 @@ const AuthProvider = ({ children }) => {
     const token = `Bearer ${localStorage.getItem("token")}`;
     if (token) {
       axios
-        .get("http://localhost:3000/auth/profile", {
+        .get(`${hostURL}/auth/profile`, {
           headers: {
             Authorization: token,
           },
@@ -33,7 +34,7 @@ const AuthProvider = ({ children }) => {
   const login = async ({ email, password }) => {
     const {
       data: { user, token },
-    } = await axios.post("http://localhost:3000/auth/signin", {
+    } = await axios.post(`${hostURL}/auth/signin`, {
       email,
       password,
     });
