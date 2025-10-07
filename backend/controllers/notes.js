@@ -2,7 +2,10 @@ import Note from "../models/Note.js";
 
 const getNotes = async (req, res) => {
   try {
-    const notes = await Note.find();
+    const {
+      headers: { course },
+    } = req;
+    const notes = await Note.find({ course });
     res.status(200).json(notes);
   } catch (error) {
     res.status(500).json({ error: error.message });

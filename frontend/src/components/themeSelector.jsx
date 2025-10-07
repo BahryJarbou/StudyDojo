@@ -74,9 +74,9 @@ const Option = ({ text, Icon, setOpen }) => {
   return (
     <motion.li
       variants={itemVariants}
-      onClick={(e) => {
+      onClick={() => {
         setOpen(false);
-        localStorage.setItem("theme", e.target.value);
+        localStorage.setItem("theme", text);
         document.getElementById("studyDojo").setAttribute("data-theme", text);
       }}
       className="flex items-center gap-2 w-full p-2 text-xs font-medium whitespace-nowrap rounded-md hover:bg-accent text-info hover:text-secondary transition-colors cursor-pointer theme-controller"

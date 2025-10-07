@@ -7,7 +7,7 @@ const Navbar = ({ sideBarBtn }) => {
   const { loading, user, logout } = use(AuthContext);
   return !loading ? (
     !user ? (
-      <div className="navbar z-300 bg-base-100 w-full shadow-xl shadow-black lg:w-[60%] rounded-4xl mt-[1rem] mb-[2rem] lg:mb-[8rem] self-center px-4">
+      <div className="navbar z-300 bg-base-100 w-full shadow-xl shadow-black lg:w-[70%] rounded-4xl mt-[1rem] mb-[2rem] lg:mb-[8rem] self-center px-4">
         <div className="navbar-start gap-4">
           <NavLink
             to="/"
@@ -37,7 +37,7 @@ const Navbar = ({ sideBarBtn }) => {
         </div>
       </div>
     ) : (
-      <div className="navbar bg-base-100 w-full shadow-xl shadow-black lg:w-[60%] rounded-4xl mt-[1rem] mb-[2rem] lg:mb-[8rem] self-center px-4">
+      <div className="navbar bg-base-100 w-full shadow-xl shadow-black lg:w-[70%] rounded-4xl mt-[1rem] mb-[2rem] lg:mb-[8rem] self-center px-4">
         <div className="navbar-start gap-4">
           <NavLink
             to="/courses"

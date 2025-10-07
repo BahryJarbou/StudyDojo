@@ -1,6 +1,13 @@
+import { NavLink } from "react-router";
+import { motion } from "motion/react";
+
 const Hero = () => {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ margin: "-50%" }}
+      transition={{ duration: 1.5 }}
       className="hero shadow-2xl shadow-black rounded-4xl w-full"
       style={{
         backgroundImage:
@@ -24,10 +31,12 @@ const Hero = () => {
             streamline your study life. It’s where focus and learning finally
             find perfect balance.
           </p>
-          <button className="btn btn-soft btn-success btn-xl">Join Now</button>
+          <NavLink to="signup" className="btn btn-soft btn-success btn-xl">
+            Join Now
+          </NavLink>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

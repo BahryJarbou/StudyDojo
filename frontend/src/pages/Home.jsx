@@ -3,6 +3,7 @@ import FeatureCards from "../components/FeatureCards";
 import Hero from "../components/Hero";
 import { use } from "react";
 import { AuthContext } from "../context/AuthProvider";
+import { motion } from "motion/react";
 
 const Home = () => {
   const { loading, user } = use(AuthContext);

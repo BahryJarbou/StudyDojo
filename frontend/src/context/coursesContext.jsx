@@ -1,10 +1,12 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, use } from "react";
 import axios from "axios";
 import hostURL from "../server.js";
+import { AuthContext } from "./AuthProvider.jsx";
 
 const CoursesContext = createContext();
 
 const CoursesProvider = ({ children }) => {
+  const { user } = use(AuthContext);
   const [courses, setCourses] = useState([]);
   const [coursesLoading, setCourseLoading] = useState(true);
 
@@ -25,7 +27,7 @@ const CoursesProvider = ({ children }) => {
     } else {
       setCourseLoading(false);
     }
-  }, []);
+  }, [user]);
 
   const createCourse = async ({ name, description }) => {
     const token = `Bearer ${localStorage.getItem("token")}`;

@@ -1,13 +1,19 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Outlet } from "react-router";
-import { use } from "react";
+import { NavLink, Outlet } from "react-router";
+import { use, useEffect } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { CoursesContext } from "../context/coursesContext";
 
 const MainLayout = () => {
   const { courses } = use(CoursesContext);
   const { user, loading } = use(AuthContext);
+
+  useEffect(() => {
+    document
+      .getElementById("studyDojo")
+      .setAttribute("data-theme", localStorage.getItem("theme"));
+  }, []);
 
   return !loading ? (
     user ? (
@@ -43,7 +49,7 @@ const MainLayout = () => {
               {/* Sidebar content here */}
               {courses.map((course) => (
                 <li key={course._id}>
-                  <a>{course.name}</a>
+                  <NavLink to={`courses/${course._id}`}>{course.name}</NavLink>
                 </li>
               ))}
             </ul>
