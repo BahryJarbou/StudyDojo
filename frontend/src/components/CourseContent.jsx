@@ -2,15 +2,18 @@ import { useParams } from "react-router";
 import Flashcards from "./Flashcards";
 import DragNotes from "./DragNotes";
 import VanishList from "./ToDoList";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import axios from "axios";
 import Articles from "./Articles";
+import { ToDosContext } from "../context/ToDosContext.jsx";
 import hostURL from "../server.js";
 
 const CourseContent = () => {
+  const { todos, setTodos } = use(ToDosContext);
   const [course, setCourse] = useState({});
   const [loading, setLoading] = useState(true);
   const params = useParams();
+  console.log();
   useEffect(() => {
     axios
       .get(`${hostURL}/courses/${params.id}`)
@@ -72,15 +75,27 @@ const CourseContent = () => {
                   className="radial-progress text-success"
                   style={
                     {
-                      "--value": "70",
+                      "--value": `${
+                        (todos.filter((todo) => todo.checked).length /
+                          todos.length) *
+                        100
+                      }`,
                       "--size": "12rem",
                       "--thickness": "2rem",
                     } /* as React.CSSProperties */
                   }
-                  aria-valuenow={70}
+                  aria-valuenow={`${
+                    (todos.filter((todo) => todo.checked).length /
+                      todos.length) *
+                    100
+                  }`}
                   role="progressbar"
                 >
-                  70%
+                  {`${
+                    (todos.filter((todo) => todo.checked).length /
+                      todos.length) *
+                    100
+                  }%`}
                 </div>
               </div>
             </div>
@@ -106,7 +121,7 @@ const CourseContent = () => {
               <input type="radio" name="my-accordion-3" />
               <div className="collapse-title font-semibold">Notes</div>
               <div className="collapse-content text-sm">
-                <DragNotes />
+                <DragNotes courseID={params.id} />
               </div>
             </div>
             <div className="collapse collapse-plus bg-base-100 border border-base-300">

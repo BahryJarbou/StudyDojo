@@ -9,6 +9,18 @@ const getNotes = async (req, res) => {
   }
 };
 
+const createNote = async (req, res) => {
+  try {
+    const {
+      headers: { course },
+    } = req;
+    const note = await Note.create({ ...req.body, course });
+    res.status(200).json(note);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const getNoteById = async (req, res) => {
   try {
     const {
@@ -48,4 +60,4 @@ const deleteNote = async (req, res) => {
   }
 };
 
-export { getNotes, getNoteById, updateNote, deleteNote };
+export { getNotes, getNoteById, updateNote, deleteNote, createNote };

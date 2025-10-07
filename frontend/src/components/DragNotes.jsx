@@ -1,9 +1,9 @@
 import Notes from "./Notes";
 
-const DragNotes = () => {
+const DragNotes = ({ courseID }) => {
   return (
     <section className="relative grid min-h-screen w-full place-content-center overflow-hidden bg-neutral-950 ">
-      <Notes />
+      <Notes courseID={courseID} />
     </section>
   );
 };

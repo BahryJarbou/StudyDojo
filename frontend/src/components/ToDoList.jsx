@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Todos from "./toDos";
 import Form from "./toDoForm";
 import Header from "./toDoHeader";
 import axios from "axios";
 import hostURL from "../server.js";
+import { ToDosContext } from "../context/ToDosContext.jsx";
 
 const VanishList = ({ courseID }) => {
-  const [todos, setTodos] = useState([]);
+  const { todos, setTodos } = use(ToDosContext);
 
   useEffect(() => {
     axios

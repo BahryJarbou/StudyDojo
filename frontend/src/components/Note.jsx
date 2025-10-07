@@ -1,12 +1,16 @@
 import { motion } from "motion/react";
 import { twMerge } from "tailwind-merge";
 import { useState } from "react";
+import axios from "axios";
+import hostURL from "../server";
 
-const Note = ({ containerRef, top, left, id, note, className, setNotes }) => {
+const Note = ({ containerRef, top, left, _id, note, className, setNotes }) => {
   const [zIndex, setZIndex] = useState(0);
-
   const handleDelete = () => {
-    setNotes((pv) => pv.filter((note) => note.id !== id));
+    axios
+      .delete(`${hostURL}/notes/${_id}`)
+      .then((res) => setNotes((pv) => pv.filter((note) => note._id !== _id)))
+      .catch(console.error);
   };
 
   const updateZIndex = () => {
