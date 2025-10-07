@@ -60,7 +60,7 @@ const Todo = ({
     <motion.div
       ref={scope}
       layout
-      className="relative flex w-full items-center gap-3 rounded border border-zinc-700 bg-zinc-900 p-3"
+      className="relative flex text-[10px] md:w-full md:text-lg items-center gap-3 rounded border border-zinc-700 bg-zinc-900 p-3"
     >
       <input
         type="checkbox"
@@ -75,15 +75,15 @@ const Todo = ({
         {children}
       </p>
       <div className="ml-auto flex gap-1.5">
-        <div className="flex items-center gap-1.5 whitespace-nowrap rounded bg-zinc-800 px-1.5 py-1 text-xs text-zinc-400">
-          <FiClock />
+        <div className="flex items-center gap-1.5 whitespace-nowrap rounded bg-zinc-800 px-1.5 py-1  text-zinc-400">
+          <FiClock className="size-[0.5rem] md:size-[1em]" />
           <span>{`${time} ${unit}`}</span>
         </div>
         <button
           onClick={() => removeElement(id)}
-          className="rounded bg-red-300/20 px-1.5 py-1 text-xs text-red-300 transition-colors hover:bg-red-600 hover:text-red-200"
+          className="rounded bg-red-300/20 px-1.5 py-1  text-red-300 transition-colors hover:bg-red-600 hover:text-red-200"
         >
-          <FiTrash2 />
+          <FiTrash2 className="size-[0.5rem] md:size-[1em]" />
         </button>
       </div>
     </motion.div>

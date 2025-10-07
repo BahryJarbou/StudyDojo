@@ -27,8 +27,22 @@ const CourseContent = () => {
   return !loading ? (
     <div className="flex flex-col gap-[2rem] shrink-0 w-[90vw] justify-center items-center">
       <h1 className="text-3xl text-success font-bold">{course.name}</h1>
+      {course.spotify && (
+        <iframe
+          data-testid="embed-iframe"
+          style={{ "border-radius": "15px" }}
+          src="https://open.spotify.com/embed/playlist/1vHMsTPUu993oyhGROsxnp?utm_source=generator&theme=0"
+          width="100%"
+          height="152"
+          frameBorder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
+      )}
+
       {course.youtube && (
-        <div className="w-[90vw] h-[45vw]">
+        <div className="w-[90vw] h-[40vw]">
           <iframe
             width="100%"
             height="100%"
@@ -60,7 +74,7 @@ const CourseContent = () => {
                 {course.description}
               </div>
             </div>
-            <div className="collapse collapse-plus bg-base-100 border border-base-300">
+            <div className="collapse collapse-plus  bg-base-100 border border-base-300">
               <input type="radio" name="my-accordion-3" />
               <div className="collapse-title font-semibold">To Do</div>
               <div className="collapse-content text-sm">
@@ -111,21 +125,21 @@ const CourseContent = () => {
         <div className="tab-content  bg-base-100 border-base-300 p-6">
           <div className="join join-vertical bg-base-100 w-full">
             <div className="collapse collapse-plus bg-base-100 border border-base-300">
-              <input type="radio" name="my-accordion-3" defaultChecked />
+              <input type="radio" name="my-accordion-4" defaultChecked />
               <div className="collapse-title font-semibold">FlashCards</div>
               <div className="collapse-content text-sm">
                 <Flashcards courseID={params.id} />
               </div>
             </div>
             <div className="collapse collapse-plus bg-base-100 border border-base-300">
-              <input type="radio" name="my-accordion-3" />
+              <input type="radio" name="my-accordion-4" />
               <div className="collapse-title font-semibold">Notes</div>
               <div className="collapse-content text-sm">
                 <DragNotes courseID={params.id} />
               </div>
             </div>
             <div className="collapse collapse-plus bg-base-100 border border-base-300">
-              <input type="radio" name="my-accordion-3" />
+              <input type="radio" name="my-accordion-4" />
               <div className="collapse-title font-semibold">Articles</div>
               <div className="collapse-content text-sm justify-self-center">
                 <Articles courseID={params.id} />

@@ -10,14 +10,14 @@ import { ToDosContext, ToDosProvider } from "./context/ToDosContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <ToDosProvider>
-      <CoursesProvider>
-        <FlashcardsProvider>
-          <AuthProvider>
+    <AuthProvider>
+      <ToDosProvider>
+        <CoursesProvider>
+          <FlashcardsProvider>
             <App />
-          </AuthProvider>
-        </FlashcardsProvider>
-      </CoursesProvider>
-    </ToDosProvider>
+          </FlashcardsProvider>
+        </CoursesProvider>
+      </ToDosProvider>
+    </AuthProvider>
   </BrowserRouter>
 );

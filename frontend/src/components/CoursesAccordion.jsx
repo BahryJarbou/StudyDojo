@@ -1,15 +1,22 @@
 import { FiBook } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
 import { useWindowSize } from "./useWindowSize";
-import { useState, use } from "react";
+import { useState, use, useEffect } from "react";
 import { CoursesContext } from "../context/coursesContext";
 import { NavLink } from "react-router";
 
 const CoursesAccordion = () => {
-  const { courses, loading } = use(CoursesContext);
-  const [open, setOpen] = useState(courses.length > 0 ? courses[0]._id : 0);
+  const { courses, coursesLoading } = use(CoursesContext);
+  const [open, setOpen] = useState("");
 
-  return !loading ? (
+  useEffect(() => {
+    if (!coursesLoading) {
+      setOpen(courses.length > 0 ? courses[0]._id : 0);
+      console.log(open);
+    }
+  }, [coursesLoading]);
+
+  return !coursesLoading ? (
     <section className="p-4 bg-success">
       <div
         className={`flex flex-col max-w-[85vw] w-[85vw] shrink-0 mx-auto shadow overflow-hidden`}

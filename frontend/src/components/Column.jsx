@@ -102,7 +102,7 @@ const Column = ({
   const filteredArticles = articles.filter((c) => c.column === column);
 
   return (
-    <div className="w-[50vw] shrink-0 p-2">
+    <div className="w-[40vw] md:w-[50vw] shrink-0 p-2">
       <div className="mb-3 flex items-center justify-between">
         <h3 className={`font-medium ${headingColor}`}>{title}</h3>
         <span className="rounded text-sm text-neutral-400">
