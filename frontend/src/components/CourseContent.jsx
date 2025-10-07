@@ -45,7 +45,7 @@ const CourseContent = () => {
         <input
           type="radio"
           name="my_tabs_3"
-          className="tab text-success"
+          className="tab not-checked:not-hover:not-active:text-white text-success"
           aria-label="Course Info"
           defaultChecked
         />
@@ -105,7 +105,7 @@ const CourseContent = () => {
         <input
           type="radio"
           name="my_tabs_3"
-          className="tab text-success"
+          className="tab not-checked:not-hover:not-active:text-white text-success"
           aria-label="Course Content"
         />
         <div className="tab-content  bg-base-100 border-base-300 p-6">
