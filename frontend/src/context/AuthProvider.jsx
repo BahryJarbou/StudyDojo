@@ -45,7 +45,15 @@ const AuthProvider = ({ children }) => {
   };
 
   const signup = async ({ email, password }) => {
-    console.log({ email, password });
+    const {
+      data: { user, token },
+    } = await axios.post(`${hostURL}/auth/signup`, {
+      email,
+      password,
+    });
+    setUser(user);
+    localStorage.setItem("token", token);
+    navigate("/");
   };
 
   const logout = () => {

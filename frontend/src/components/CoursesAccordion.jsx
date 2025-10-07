@@ -7,7 +7,7 @@ import { NavLink } from "react-router";
 
 const CoursesAccordion = () => {
   const { courses, loading } = use(CoursesContext);
-  const [open, setOpen] = useState(courses[0]._id);
+  const [open, setOpen] = useState(courses.length > 0 ? courses[0]._id : 0);
 
   return !loading ? (
     <section className="p-4 bg-success">
