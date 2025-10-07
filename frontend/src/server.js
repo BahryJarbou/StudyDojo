@@ -1,3 +1,3 @@
-const hostURL = "http://studydojo-backend.onrender.com";
+const hostURL = "https://studydojo-backend.onrender.com";
 
 export default hostURL;
