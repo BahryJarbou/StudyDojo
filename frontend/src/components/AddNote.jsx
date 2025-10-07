@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { motion } from "motion/react";
+import axios from "axios";
+import hostURL from "../server";
 
-const AddNote = ({ setNotes }) => {
+const AddNote = ({ setNotes, courseID }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [adding, setAdding] = useState(false);
@@ -13,9 +15,13 @@ const AddNote = ({ setNotes }) => {
     const newNote = {
       title: title.trim(),
       content: content.trim(),
-      id: Math.random().toString(),
     };
-    setNotes((pv) => [...pv, newNote]);
+    axios
+      .post(`${hostURL}/notes`, newNote, {
+        headers: { course: courseID },
+      })
+      .then((res) => setNotes((pv) => [...pv, res.data]))
+      .catch(console.error);
     setAdding(false);
   };
 

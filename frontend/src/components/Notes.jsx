@@ -1,31 +1,31 @@
 import { useRef, useState, useEffect } from "react";
 import Note from "./Note";
 import AddNote from "./AddNote";
+import axios from "axios";
+import hostURL from "../server";
 
-const Notes = () => {
+const Notes = ({ courseID }) => {
   const [notes, setNotes] = useState([]);
-  const [hasChecked, setHasChecked] = useState(false);
 
   useEffect(() => {
-    hasChecked && localStorage.setItem("cards", JSON.stringify(notes), [notes]);
-  }, [notes]);
-
-  useEffect(() => {
-    const cardData = localStorage.getItem("cards");
-    setNotes(cardData ? JSON.parse(cardData) : []);
-    setHasChecked(true);
+    axios
+      .get(`${hostURL}/notes`, {
+        headers: { course: courseID },
+      })
+      .then((res) => setNotes((pv) => res.data))
+      .catch(console.error);
   }, []);
 
   const containerRef = useRef(null);
   return (
     <>
       <div ref={containerRef} className="absolute inset-0 z-10">
-        <AddNote setNotes={setNotes} />
+        <AddNote setNotes={setNotes} courseID={courseID} />
         {notes.map((note) => {
           return (
             <Note
-              key={note.id}
-              id={note.id}
+              key={note._id}
+              _id={note._id}
               containerRef={containerRef}
               rotate="6deg"
               top="20%"
