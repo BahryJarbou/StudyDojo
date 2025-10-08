@@ -64,7 +64,7 @@ const Navbar = ({ sideBarBtn }) => {
       </div>
     )
   ) : (
-    <span className=" absolute translate-1/2 top-[50%] left-[50%] loading loading-spinner loading-xl"></span>
+    <span className=" absolute -translate-1/2 top-[50%] left-[50%] loading loading-spinner loading-xl"></span>
   );
 };
 
