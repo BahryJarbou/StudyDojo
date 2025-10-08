@@ -18,7 +18,7 @@ const Home = () => {
     )
   ) : (
     <div className="flex flex-col gap-12 max-w-full">
-      <span className=" absolute translate-1/2 top-[50%] left-[50%] loading loading-spinner loading-xl"></span>
+      <span className=" absolute -translate-1/2 top-[50%] left-[50%] loading loading-spinner loading-xl"></span>
     </div>
   );
 };
