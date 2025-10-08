@@ -17,7 +17,7 @@ const createNote = async (req, res) => {
     const {
       headers: { course },
     } = req;
-    const note = await Note.create({ ...req.body, course });
+    const note = await Note.create({ ...req.body, user: req.user._id, course });
     res.status(200).json(note);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -32,6 +32,14 @@ const getNoteById = async (req, res) => {
     const note = await Note.findById(id);
     if (!note) return res.status(404).json({ error: "Note not found" });
     res.status(200).json(note);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+const getnotesCountByUserId = async (req, res) => {
+  try {
+    const notesCount = await Note.countDocuments({ user: req.user._id });
+    res.status(200).json(notesCount);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -63,4 +71,11 @@ const deleteNote = async (req, res) => {
   }
 };
 
-export { getNotes, getNoteById, updateNote, deleteNote, createNote };
+export {
+  getNotes,
+  getNoteById,
+  updateNote,
+  deleteNote,
+  createNote,
+  getnotesCountByUserId,
+};

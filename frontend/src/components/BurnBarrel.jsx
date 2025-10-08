@@ -17,8 +17,11 @@ const BurnBarrel = ({ setArticles }) => {
 
   const handleDragEnd = (e) => {
     const articleId = e.dataTransfer.getData("articleId");
+    const token = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .delete(`${hostURL}/articles/${articleId}`)
+      .delete(`${hostURL}/articles/${articleId}`, {
+        headers: { Authorization: token },
+      })
       .then((res) => setArticles((pv) => pv.filter((c) => c._id !== articleId)))
       .catch(console.error);
     setActive(false);

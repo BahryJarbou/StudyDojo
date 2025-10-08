@@ -6,7 +6,12 @@ import { use, useEffect, useState } from "react";
 import axios from "axios";
 import Articles from "./Articles";
 import { ToDosContext } from "../context/ToDosContext.jsx";
+import Markdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+import remarkGfm from "remark-gfm";
 import hostURL from "../server.js";
+import Timeline from "./Timeline.jsx";
 
 const CourseContent = () => {
   const { todos, setTodos } = use(ToDosContext);
@@ -14,9 +19,12 @@ const CourseContent = () => {
   const [loading, setLoading] = useState(true);
   const params = useParams();
   console.log();
+  const token = `Bearer ${localStorage.getItem("token")}`;
   useEffect(() => {
     axios
-      .get(`${hostURL}/courses/${params.id}`)
+      .get(`${hostURL}/courses/${params.id}`, {
+        headers: { Authorization: token },
+      })
       .then((res) => {
         setCourse(res.data);
       })
@@ -66,50 +74,80 @@ const CourseContent = () => {
         <div className="tab-content bg-base-100 border-base-300 p-6">
           <div className="join join-vertical bg-base-100 w-full">
             <div className="collapse collapse-plus bg-base-100 border border-base-300">
-              <input type="radio" name="my-accordion-3" defaultChecked />
+              <input type="checkbox" name="my-accordion-3" />
               <div className="collapse-title font-semibold">
                 Course Discription
               </div>
               <div className="collapse-content text-sm whitespace-pre-wrap">
-                {course.description}
+                <Markdown
+                  children={`${course.description}`}
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    code(props) {
+                      const { children, className, node, ...rest } = props;
+                      const match = /language-(\w+)/.exec(className || "");
+                      return match ? (
+                        <SyntaxHighlighter
+                          {...rest}
+                          PreTag="div"
+                          children={String(children).replace(/\n$/, "")}
+                          language={match[1]}
+                          style={nord}
+                        />
+                      ) : (
+                        <code {...rest} className={className}>
+                          {children}
+                        </code>
+                      );
+                    },
+                  }}
+                />
               </div>
             </div>
             <div className="collapse collapse-plus  bg-base-100 border border-base-300">
-              <input type="radio" name="my-accordion-3" />
+              <input type="checkbox" name="my-accordion-3" />
               <div className="collapse-title font-semibold">To Do</div>
               <div className="collapse-content text-sm">
                 <VanishList courseID={params.id} />
               </div>
             </div>
             <div className="collapse collapse-plus bg-base-100 border border-base-300">
-              <input type="radio" name="my-accordion-3" />
+              <input type="checkbox" name="my-accordion-3" />
               <div className="collapse-title font-semibold">Progress</div>
               <div className="collapse-content text-sm justify-self-center">
-                <div
-                  className="radial-progress text-success"
-                  style={
-                    {
-                      "--value": `${
-                        (todos.filter((todo) => todo.checked).length /
+                <div className="flex flex-col justify-center items-center gap-[3rem]">
+                  <div
+                    className="radial-progress text-success"
+                    style={
+                      {
+                        "--value": `${
+                          todos.length !== 0
+                            ? (todos.filter((todo) => todo.checked).length /
+                                todos.length) *
+                              100
+                            : 0
+                        }`,
+                        "--size": "12rem",
+                        "--thickness": "2rem",
+                      } /* as React.CSSProperties */
+                    }
+                    aria-valuenow={`${
+                      todos.length !== 0
+                        ? (todos.filter((todo) => todo.checked).length /
+                            todos.length) *
+                          100
+                        : 0
+                    }`}
+                    role="progressbar"
+                  >
+                    {`${(todos.length !== 0
+                      ? (todos.filter((todo) => todo.checked).length /
                           todos.length) *
                         100
-                      }`,
-                      "--size": "12rem",
-                      "--thickness": "2rem",
-                    } /* as React.CSSProperties */
-                  }
-                  aria-valuenow={`${
-                    (todos.filter((todo) => todo.checked).length /
-                      todos.length) *
-                    100
-                  }`}
-                  role="progressbar"
-                >
-                  {`${
-                    (todos.filter((todo) => todo.checked).length /
-                      todos.length) *
-                    100
-                  }%`}
+                      : 0
+                    ).toFixed(1)}%`}
+                  </div>
+                  <Timeline todos={todos} />
                 </div>
               </div>
             </div>
@@ -125,21 +163,21 @@ const CourseContent = () => {
         <div className="tab-content  bg-base-100 border-base-300 p-6">
           <div className="join join-vertical bg-base-100 w-full">
             <div className="collapse collapse-plus bg-base-100 border border-base-300">
-              <input type="radio" name="my-accordion-4" defaultChecked />
+              <input type="checkbox" name="my-accordion-4" />
               <div className="collapse-title font-semibold">FlashCards</div>
               <div className="collapse-content text-sm">
                 <Flashcards courseID={params.id} />
               </div>
             </div>
             <div className="collapse collapse-plus bg-base-100 border border-base-300">
-              <input type="radio" name="my-accordion-4" />
+              <input type="checkbox" name="my-accordion-4" />
               <div className="collapse-title font-semibold">Notes</div>
               <div className="collapse-content text-sm">
                 <DragNotes courseID={params.id} />
               </div>
             </div>
             <div className="collapse collapse-plus bg-base-100 border border-base-300">
-              <input type="radio" name="my-accordion-4" />
+              <input type="checkbox" name="my-accordion-4" />
               <div className="collapse-title font-semibold">Articles</div>
               <div className="collapse-content text-sm justify-self-center">
                 <Articles courseID={params.id} />

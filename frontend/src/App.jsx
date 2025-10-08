@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import About from "./pages/about";
 import CourseContent from "./components/CourseContent";
 import { AnimatePresence, motion } from "motion/react";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -92,6 +93,7 @@ const AnimatedRoutes = () => {
               }
             />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </AnimatePresence>

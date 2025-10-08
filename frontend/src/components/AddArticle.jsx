@@ -18,9 +18,10 @@ const AddArticle = ({ column, setArticles, courseID }) => {
     };
     console.log(courseID);
 
+    const token = `Bearer ${localStorage.getItem("token")}`;
     axios
       .post(`${hostURL}/articles`, newArticle, {
-        headers: { course: courseID },
+        headers: { Authorization: token, course: courseID },
       })
       .then((res) => setArticles((pv) => [...pv, res.data]))
       .catch(console.error);

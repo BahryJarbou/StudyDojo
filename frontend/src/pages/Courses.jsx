@@ -1,6 +1,6 @@
 import { AuthContext } from "../context/AuthProvider";
 import { use, useState } from "react";
-import { Navigate } from "react-router";
+import { Navigate, NavLink } from "react-router";
 import { CoursesContext } from "../context/coursesContext";
 import CoursesAccordion from "../components/CoursesAccordion";
 
@@ -22,13 +22,23 @@ const Courses = () => {
     <Navigate to="/" />
   ) : !coursesLoading ? (
     <div className="flex flex-col justify-center gap-[4vh] shrink-0">
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
+      {user.username && (
+        <h1 className="text-center !text-6xl text-success">
+          Hello {user.username}!
+        </h1>
+      )}
+
+      <NavLink to="/profile" className="btn btn-soft btn-success">
+        Profile
+      </NavLink>
+
       <button
         className="btn btn-soft btn-success"
         onClick={() => document.getElementById("my_modal_1").showModal()}
       >
         Create New Course
       </button>
+
       <dialog id="my_modal_1" className="modal modal-backdrop text-success">
         <div className="modal-box max-w-screen w-screen lg:h-fit lg:w-fit">
           <h3 className="font-bold text-lg">

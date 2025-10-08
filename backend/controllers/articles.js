@@ -17,7 +17,11 @@ const createArticle = async (req, res) => {
     const {
       headers: { course },
     } = req;
-    const article = await Article.create({ ...req.body, course });
+    const article = await Article.create({
+      ...req.body,
+      user: req.user._id,
+      course,
+    });
     res.status(200).json(article);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -32,6 +36,14 @@ const getArticleById = async (req, res) => {
     const article = await Article.findById(id);
     if (!article) return res.status(404).json({ error: "Article not found" });
     res.status(200).json(article);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+const getArticlesCountByUserId = async (req, res) => {
+  try {
+    const articlesCount = await Article.countDocuments({ user: req.user._id });
+    res.status(200).json(articlesCount);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -69,4 +81,5 @@ export {
   updateArticle,
   deleteArticle,
   createArticle,
+  getArticlesCountByUserId,
 };

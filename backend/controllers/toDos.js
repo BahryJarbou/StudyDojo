@@ -16,7 +16,7 @@ const createToDo = async (req, res) => {
       headers: { course },
     } = req;
     console.log(body);
-    const toDo = await ToDo.create({ ...body, course });
+    const toDo = await ToDo.create({ ...body, user: req.user._id, course });
     res.status(200).json(toDo);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -31,6 +31,19 @@ const getToDoById = async (req, res) => {
     const toDo = await ToDo.findById(id);
     if (!toDo) return res.status(404).json({ error: "ToDo is not found" });
     res.status(200).json(toDo);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const getToDosCountByUserId = async (req, res) => {
+  try {
+    const toDosCount = await ToDo.countDocuments({ user: req.user._id });
+    const toDosFinishedCount = await ToDo.countDocuments({
+      user: req.user._id,
+      checked: true,
+    });
+    res.status(200).json({ toDosCount, toDosFinishedCount });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -63,4 +76,11 @@ const deleteToDo = async (req, res) => {
   }
 };
 
-export { getToDos, getToDoById, updateToDo, deleteToDo, createToDo };
+export {
+  getToDos,
+  getToDoById,
+  updateToDo,
+  deleteToDo,
+  createToDo,
+  getToDosCountByUserId,
+};
