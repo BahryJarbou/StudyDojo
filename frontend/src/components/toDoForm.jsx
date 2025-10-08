@@ -22,9 +22,10 @@ const Form = ({ setTodos, courseID }) => {
       time: `${time}`,
       unit: `${unit}`,
     };
+    const token = `Bearer ${localStorage.getItem("token")}`;
     axios
       .post(`${hostURL}/todos`, todo, {
-        headers: { course: courseID },
+        headers: { Authorization: token, course: courseID },
       })
       .then((res) => setTodos((pv) => [...pv, res.data]))
       .catch(console.error);

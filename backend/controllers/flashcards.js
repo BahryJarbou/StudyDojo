@@ -17,8 +17,23 @@ const createFlashcard = async (req, res) => {
     const {
       headers: { course },
     } = req;
-    const flashcard = await Flashcard.create({ ...req.body, course });
+    const flashcard = await Flashcard.create({
+      ...req.body,
+      user: req.user._id,
+      course,
+    });
     res.status(200).json(flashcard);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const getFlashcardsCountByUserId = async (req, res) => {
+  try {
+    const flashcardsCount = await Flashcard.countDocuments({
+      user: req.user._id,
+    });
+    res.status(200).json(flashcardsCount);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -72,4 +87,5 @@ export {
   updateFlashcard,
   deleteFlashcard,
   createFlashcard,
+  getFlashcardsCountByUserId,
 };

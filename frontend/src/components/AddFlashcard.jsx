@@ -19,15 +19,17 @@ const AddFlashcard = ({ courseID }) => {
       question: question.trim(),
       answer: answer.trim(),
     };
-
+    const token = `Bearer ${localStorage.getItem("token")}`;
     axios
       .post(`${hostURL}/flashcards`, newCard, {
         headers: {
+          Authorization: token,
           course: courseID,
         },
       })
-      .then((res) => {})
-      .catch(console.error)
+      .then((res) => {
+        setHasChanged((pv) => !pv);
+      })
       .finally(() => {
         () => null;
       });

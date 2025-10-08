@@ -16,9 +16,10 @@ const AddNote = ({ setNotes, courseID }) => {
       title: title.trim(),
       content: content.trim(),
     };
+    const token = `Bearer ${localStorage.getItem("token")}`;
     axios
       .post(`${hostURL}/notes`, newNote, {
-        headers: { course: courseID },
+        headers: { Authorization: token, course: courseID },
       })
       .then((res) => setNotes((pv) => [...pv, res.data]))
       .catch(console.error);

@@ -8,11 +8,16 @@ import {
   updateFlashcard,
   deleteFlashcard,
   createFlashcard,
+  getFlashcardsCountByUserId,
 } from "../controllers/flashcards.js";
 
 const flashcardRouter = Router();
 
-flashcardRouter.route("/").get(getFlashcards).post(createFlashcard);
+flashcardRouter
+  .route("/")
+  .get(getFlashcards)
+  .post(verifyToken, createFlashcard);
+flashcardRouter.route("/stats").get(verifyToken, getFlashcardsCountByUserId);
 flashcardRouter
   .route("/:id")
   .get(getFlashcardById)

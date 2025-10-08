@@ -10,6 +10,11 @@ const toDoSchema = new Schema({
     ref: "Course",
     required: [true, "course ref is required"],
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: [true, "User ref is required"],
+  },
 });
 
 export default model("ToDo", toDoSchema);

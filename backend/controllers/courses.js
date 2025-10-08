@@ -38,6 +38,15 @@ const getCourseById = async (req, res) => {
   }
 };
 
+const getCoursesCountByUserId = async (req, res) => {
+  try {
+    const coursesCount = await Course.countDocuments({ user: req.user._id });
+    res.status(200).json(coursesCount);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const updateCourse = async (req, res) => {
   try {
     const {
@@ -63,4 +72,11 @@ const deleteCourse = async (req, res) => {
   }
 };
 
-export { getCourses, getCourseById, updateCourse, deleteCourse, createCourse };
+export {
+  getCourses,
+  getCourseById,
+  updateCourse,
+  deleteCourse,
+  createCourse,
+  getCoursesCountByUserId,
+};

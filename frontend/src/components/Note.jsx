@@ -7,8 +7,9 @@ import hostURL from "../server";
 const Note = ({ containerRef, top, left, _id, note, className, setNotes }) => {
   const [zIndex, setZIndex] = useState(0);
   const handleDelete = () => {
+    const token = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .delete(`${hostURL}/notes/${_id}`)
+      .delete(`${hostURL}/notes/${_id}`, { headers: { Authorization: token } })
       .then((res) => setNotes((pv) => pv.filter((note) => note._id !== _id)))
       .catch(console.error);
   };

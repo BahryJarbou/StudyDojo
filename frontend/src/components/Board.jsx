@@ -7,9 +7,10 @@ import hostURL from "../server.js";
 const Board = ({ courseID }) => {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
+    const token = `Bearer ${localStorage.getItem("token")}`;
     axios
       .get(`${hostURL}/articles`, {
-        headers: { course: courseID },
+        headers: { Authorization: token, course: courseID },
       })
       .then((res) => setArticles(res.data))
       .catch(console.error);

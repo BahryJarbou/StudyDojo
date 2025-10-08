@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import move from "lodash-move";
 import CardFlip from "./CardFlip";
 import axios from "axios";
+import AddFlashcard from "./AddFlashcard.jsx";
 import { FlashcardContext } from "../context/FlashcardsContext";
 import hostURL from "../server.js";
 const CARD_OFFSET = 10;
@@ -13,11 +14,10 @@ const cardStyle = {
   // transformOrigin: "top center",
   listStyle: "none",
 };
-
 const Flashcards = ({ courseID }) => {
   return (
     <section className="relative flex justify-center items-center min-h-screen w-full place-content-center overflow-hidden bg-neutral-950">
-      {/* <AddFlashcard courseID={courseID} /> */}
+      <AddFlashcard courseID={courseID} />
       <FlashcardsStack courseID={courseID} />
     </section>
     // <div className="relative flex justify-center items-center height-screen">

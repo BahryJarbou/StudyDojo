@@ -3,8 +3,11 @@ import hostURL from "../server.js";
 
 const Card = ({ title, content, id, setCards }) => {
   const deleteCard = () => {
+    const token = `Bearer ${localStorage.getItem("token")}`;
     axios
-      .delete(`${hostURL}/flashcards/${id}`)
+      .delete(`${hostURL}/flashcards/${id}`, {
+        headers: { Authorization: token },
+      })
       .then((res) => setCards((pv) => pv.filter((card) => card._id !== id)))
       .catch(console.error)
       .finally(() => null);

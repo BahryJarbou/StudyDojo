@@ -2,6 +2,7 @@ import { use } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { NavLink } from "react-router";
 import ThemeSelector from "./themeSelector";
+import studyDojo from "../assets/studyDojo.png";
 
 const Navbar = ({ sideBarBtn }) => {
   const { loading, user, logout } = use(AuthContext);
@@ -14,7 +15,7 @@ const Navbar = ({ sideBarBtn }) => {
             className="btn btn-ghost sm:text-xs lg:text-xl rounded-4xl btn-soft btn-success sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl"
           >
             <img
-              src="studyDojo.png"
+              src={studyDojo}
               alt="Home"
               className="h-[2rem] lg:h-[4rem] object-cover"
             />
@@ -44,7 +45,7 @@ const Navbar = ({ sideBarBtn }) => {
             className="btn btn-ghost sm:text-xs lg:text-xl rounded-4xl btn-soft btn-success sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl"
           >
             <img
-              src="studyDojo.png"
+              src={studyDojo}
               alt="Home"
               className="h-[2rem] lg:h-[4rem] object-cover"
             />

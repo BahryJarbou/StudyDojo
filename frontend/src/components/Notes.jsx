@@ -8,9 +8,10 @@ const Notes = ({ courseID }) => {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
+    const token = `Bearer ${localStorage.getItem("token")}`;
     axios
       .get(`${hostURL}/notes`, {
-        headers: { course: courseID },
+        headers: { Authorization: token, course: courseID },
       })
       .then((res) => setNotes((pv) => res.data))
       .catch(console.error);

@@ -6,6 +6,7 @@ import {
   updateCourse,
   deleteCourse,
   createCourse,
+  getCoursesCountByUserId,
 } from "../controllers/courses.js";
 import verifyToken from "../middlewares/auth.js";
 
@@ -15,6 +16,7 @@ courseRouter
   .route("/")
   .get(verifyToken, getCourses)
   .post(verifyToken, createCourse);
+courseRouter.route("/stats").get(verifyToken, getCoursesCountByUserId);
 courseRouter
   .route("/:id")
   .get(getCourseById)

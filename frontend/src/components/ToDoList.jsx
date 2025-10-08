@@ -8,11 +8,12 @@ import { ToDosContext } from "../context/ToDosContext.jsx";
 
 const VanishList = ({ courseID }) => {
   const { todos, setTodos } = use(ToDosContext);
+  const token = `Bearer ${localStorage.getItem("token")}`;
 
   useEffect(() => {
     axios
       .get(`${hostURL}/todos`, {
-        headers: { course: courseID },
+        headers: { Authorization: token, course: courseID },
       })
       .then((res) => setTodos(res.data))
       .catch(console.error);
@@ -20,9 +21,13 @@ const VanishList = ({ courseID }) => {
 
   const handleCheck = (id) => {
     axios
-      .put(`${hostURL}/todos/${id}`, {
-        checked: !todos.find((t) => t._id === id).checked,
-      })
+      .put(
+        `${hostURL}/todos/${id}`,
+        {
+          checked: !todos.find((t) => t._id === id).checked,
+        },
+        { headers: { Authorization: token } }
+      )
       .then(() => {})
       .catch(console.error);
     setTodos((pv) =>
@@ -32,7 +37,7 @@ const VanishList = ({ courseID }) => {
 
   const removeElement = (id) => {
     axios
-      .delete(`${hostURL}/todos/${id}`)
+      .delete(`${hostURL}/todos/${id}`, { headers: { Authorization: token } })
       .then((res) => console.log(res.data))
       .catch(console.error);
     setTodos((pv) => pv.filter((t) => t._id !== id));

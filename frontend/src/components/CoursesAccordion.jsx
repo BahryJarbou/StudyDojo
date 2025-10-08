@@ -4,6 +4,10 @@ import { useWindowSize } from "./useWindowSize";
 import { useState, use, useEffect } from "react";
 import { CoursesContext } from "../context/coursesContext";
 import { NavLink } from "react-router";
+import Markdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+import remarkGfm from "remark-gfm";
 
 const CoursesAccordion = () => {
   const { courses, coursesLoading } = use(CoursesContext);
@@ -110,7 +114,32 @@ const Panel = ({ open, setOpen, id, title, description, youtube }) => {
               exit="closed"
               className="flex flex-col w-full justify-between grow shrink-0 px-4 py-2 bg-black/60 backdrop-blur-sm text-white"
             >
-              <p className="text-success whitespace-pre-wrap">{description}</p>
+              <p className="text-success whitespace-pre-wrap">
+                {" "}
+                <Markdown
+                  children={`${description}`}
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    code(props) {
+                      const { children, className, node, ...rest } = props;
+                      const match = /language-(\w+)/.exec(className || "");
+                      return match ? (
+                        <SyntaxHighlighter
+                          {...rest}
+                          PreTag="div"
+                          children={String(children).replace(/\n$/, "")}
+                          language={match[1]}
+                          style={nord}
+                        />
+                      ) : (
+                        <code {...rest} className={className}>
+                          {children}
+                        </code>
+                      );
+                    },
+                  }}
+                />
+              </p>
               <div className="flex place-self-end gap-4 justify-self-end justify-end">
                 <button
                   className="btn btn-soft btn-success btn-xs md:btn-md lg:btn-xl"
